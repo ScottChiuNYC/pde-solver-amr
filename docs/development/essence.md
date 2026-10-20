@@ -418,6 +418,30 @@ C_i=\frac{\min(h_L,h_R)}{2}|s_i-s_{i-1}|.
 
 At endpoints use `C_0=C_1` and `C_{m-1}=C_{m-2}` for `m` nodes; for each leaf cell define `I_i=\max(C_i,C_{i+1})`. This is a **simple solution-curvature indicator, not a proved a posteriori PDE-error estimator**.
 
+The following indicator evaluation is normative **only for Adaptive mode** and supplements Section 3's binary64 arithmetic and failure model. Apply the same complete pass whenever indicators are computed or recomputed below, on that pass's current ordered coordinates and finite nodal values. For `m` nodes, first visit every leaf cell `i=0..m-2` from left to right and perform these assignments in order:
+
+```text
+h[i] = x[i+1] - x[i]
+dU[i] = U[i+1] - U[i]
+s[i] = dU[i] / h[i]
+```
+
+Check each result immediately for finiteness before any further operation uses it; also require `h[i]>0` before forming `dU[i]` or dividing. After all cells succeed, visit interior nodes `i=1..m-2` from left to right, performing in order:
+
+```text
+jump = s[i] - s[i-1]
+magnitude = abs(jump)
+spacing = min(h[i-1], h[i])
+half_spacing = spacing / 2
+C[i] = half_spacing * magnitude
+```
+
+Here `abs` is the binary64 absolute value, and `min` selects the smaller of its two checked finite operands. Check every assigned result immediately for finiteness before proceeding. In particular, divide the selected spacing by `2` before multiplying by the absolute slope jump. After all interior nodes succeed, copy `C[0]=C[1]`, then `C[m-1]=C[m-2]`, checking each copied result for finiteness. Finally visit cells `i=0..m-2` from left to right and assign `I[i]=max(C[i],C[i+1])`, where `max` selects the larger checked finite operand, with an immediate finiteness check of each result. These assignments define the floating-point evaluation of the unchanged real-arithmetic indicator above.
+
+Every subtraction, division and multiplication in this pass is one separate binary64 operation under Section 3's round-to-nearest and gradual-underflow model. Retain finite underflow, including zero, in value differences, slopes, jumps, half-spacings and curvature/cell indicators; a spacing must still be strictly positive. Do not reassociate, contract operations, use wider intermediates to bypass a check, replace the pass by an algebraically equivalent evaluation, or rescale, retry or fall back after failure. Any nonfinite prescribed intermediate, including an absolute-value, selection or copied result, or a nonpositive spacing throws `std::runtime_error` immediately, identifying adaptive indicator evaluation, the completed step (`0` at initialization), the pre-refinement or pre-coarsening pass, the arithmetic category and the relevant cell/physical interval or interior-node index. Exact message wording is not prescribed.
+
+A complete indicator pass must succeed before any tolerance comparison or adaptation decision based on it. The pre-refinement pass therefore precedes depth-cap flagging, formation of the refinement batch, midpoint preflight, the node-cap decision and any refinement mutation, inserted-value sampling/transfer or refinement event at that opportunity. The later recomputation precedes all coarsening eligibility decisions, coarsening mutations and coarsening events. A failed pass does not treat infinity or NaN as an indicator, set `refinement_limited` because of that failure, skip a cell, or continue with a depth/node-cap limitation. It ends the solve before any further adaptation or PDE step and returns no partial successful `Solution1D`, including any earlier internal events. A failure of the later pass can occur after an internally accepted refinement batch; that still returns no partial result and performs no coarsening. User callback side effects retain Section 3's existing rule.
+
 At each opportunity, compute the indicators on the pre-adaptation state. Any leaf with `I_i>refine_tolerance` at the depth cap sets `refinement_limited=true` and is excluded from the proposed refinement batch. The batch consists of all other leaves with `I_i>refine_tolerance`; split each at most once, simultaneously. A flag set at any opportunity remains true for the remainder of a successful solve, even if later coarsening frees capacity.
 
 Before the node-cap decision or any refinement mutation, inserted-value sampling/transfer, or refinement event, preflight the proposed leaves from left to right. For each parent `[left,right]`, compute, as separate checked binary64 operations in order, `width=right-left`, `half=width/2`, `mid=left+half`, under Section 3's arithmetic model. Require finite positive `width`, finite `half` and `mid`, and the strict test `left<mid && mid<right`. That exact `mid` is the coordinate used if the batch is accepted; do not substitute another midpoint expression, `nextafter`, or an endpoint. If any test fails, throw `std::runtime_error` identifying midpoint representability and the parent interval. This is a solve failure, not a depth/capacity limitation or a skipped cell: the entire proposed batch is unapplied, no event from it is accepted, no coarsening at that opportunity or subsequent PDE step occurs, and no partial `Solution1D` (including any earlier internal events) is returned. This failure takes precedence over a possible node-cap block. Leaves excluded solely by the depth cap are not midpoint-tested.

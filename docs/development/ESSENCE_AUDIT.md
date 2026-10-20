@@ -9,8 +9,8 @@ This journal records provenance only; it is not normative implementation authori
 - Backend: GitHub
 - State: REMEDIATING
 - Skill revision: 9d1845f509a88dc8aad2f825f41a7009c3e77d6c
-- Latest audited target: 27b55391694ae1e59d09c04689e5385cad747777
-- Latest round: R2
+- Latest audited target: f90372967c981f7e47b7a9b7fdde56e27c7c8a57
+- Latest round: R3
 - Isolation: delivery_only; fresh contexts without inherited history and dispatcher-filtered verified inputs. Workers retain inherited tools; this is not an enforced access sandbox.
 
 ## Round R1
@@ -53,3 +53,16 @@ The journal-only branch does not change audited normative authority. No solver i
 - Only Section 8.4 transfer text changed; physical-coordinate weights at rounded midpoint and checked binary64 evaluation now specified. All other sections, prior midpoint/batch policy and Section 7 byte-identical.
 - Candidate remains Draft; fresh full-scope exact-target audit required.
 - Candidate 27b5539 baseline CI: Linux/Windows success, PR run 39472944336 and push run 39472937729. This is infrastructure evidence, not solver implementation acceptance.
+
+## Round R3
+
+- Target: f90372967c981f7e47b7a9b7fdde56e27c7c8a57; Essence blob d9177e725635f99b84e3ade3981a83baf6aef5bd.
+- Control: https://github.com/ScottChiuNYC/pde-solver-amr/issues/15
+- Fresh independent valid sealed results: A1 FAIL (#16), A2 FAIL (#17), A3 FAIL (#18).
+- Reconciliation: https://github.com/ScottChiuNYC/pde-solver-amr/issues/19
+- Round verdict: FAIL / REMEDIATE; new C-04, indicator arithmetic and nonfinite handling. Prior C-01/C-02/C-03 did not recur.
+- Remediation: https://github.com/ScottChiuNYC/pde-solver-amr/issues/20
+- Only Section 8.4 indicator text changed. Every other section and prior midpoint/transfer policy byte-identical; no new empirical gate, implementation or experiment.
+- Owner decisions: none; existing Section 8.5 bounded delegation.
+- Draft retained, fresh full-scope audit required.
+- Candidate f903729 baseline CI: Linux/Windows success, PR run 39474003309 and push run 39473997805.
