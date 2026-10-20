@@ -1,0 +1,32 @@
+# Essence Audit
+
+This journal records provenance only; it is not normative implementation authority.
+
+## Status
+
+- Essence: docs/development/essence.md
+- Run: ICC-20261020-AMR — https://github.com/ScottChiuNYC/pde-solver-amr/issues/1
+- Backend: GitHub
+- State: AUDITING
+- Skill revision: 9d1845f509a88dc8aad2f825f41a7009c3e77d6c
+- Latest audited target: f6ea97425cb757d95b5cbb16832145144b6f3514
+- Latest round: R1
+- Isolation: delivery_only; fresh contexts without inherited history and dispatcher-filtered verified inputs. Workers retain inherited tools; this is not an enforced access sandbox.
+
+## Round R1
+
+- Target commit: f6ea97425cb757d95b5cbb16832145144b6f3514
+- Tree: 926f4d129bfda9338a911fcfddbd1f2e3032fc06
+- Essence blob: bd1794968061c80cd49aee1bd165049817f58ff2
+- Scope: complete current Draft, including preserved fixed-grid contract and additive adaptive spatial delta; Project Skeleton Contract v1.1.
+- Control: https://github.com/ScottChiuNYC/pde-solver-amr/issues/2
+- A1: PENDING — https://github.com/ScottChiuNYC/pde-solver-amr/issues/3
+- A2: PENDING — https://github.com/ScottChiuNYC/pde-solver-amr/issues/4
+- A3: PENDING — https://github.com/ScottChiuNYC/pde-solver-amr/issues/5
+- Reconciliation: pending all valid sealed slots
+- Owner decisions: none established
+- Round verdict: pending
+
+## Integration
+
+The journal-only branch does not change audited normative authority. No solver implementation or new empirical acceptance obligation is introduced. The target repository has no CodeBinder/publication workflow; its normal build workflow is retained.
