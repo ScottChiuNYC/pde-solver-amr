@@ -4,7 +4,7 @@ project(pde_solver_amr_core_test)
 find_package(GTest CONFIG REQUIRED)
 
 # Add all .cpp files in this directory as test sources
-file(GLOB TEST_SOURCES *.cpp)
+file(GLOB TEST_SOURCES CONFIGURE_DEPENDS *.cpp)
 add_executable(pde_solver_amr_core_test ${TEST_SOURCES})
 
 target_include_directories(pde_solver_amr_core_test PRIVATE

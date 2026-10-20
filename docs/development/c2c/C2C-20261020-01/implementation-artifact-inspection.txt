@@ -1,0 +1,33 @@
+SDIST exact bytes PASS README.md
+SDIST exact bytes PASS cpp/include/pde_solver_amr_core/Array.h
+SDIST exact bytes PASS cpp/include/pde_solver_amr_core/Checked.h
+SDIST exact bytes PASS cpp/include/pde_solver_amr_core/CrankNicholson1D.h
+SDIST exact bytes PASS cpp/include/pde_solver_amr_core/Domain.h
+SDIST exact bytes PASS cpp/include/pde_solver_amr_core/Equation.h
+SDIST exact bytes PASS cpp/include/pde_solver_amr_core/Grid.h
+SDIST exact bytes PASS cpp/include/pde_solver_amr_core/PDE.h
+SDIST exact bytes PASS cpp/include/pde_solver_amr_core/Tridiagonal.h
+SDIST exact bytes PASS cpp/include/pde_solver_amr_core/Types.h
+SDIST exact bytes PASS cpp/include/pde_solver_amr_core/hello.h
+SDIST exact bytes PASS examples/cpp/demo.cpp
+SDIST exact bytes PASS pyproject.toml
+SDIST exact bytes PASS tests/cpp/CMakeLists.txt
+SDIST exact bytes PASS tests/cpp/implementation_test.cpp
+SDIST exact bytes PASS tests/vcpkg-consumer/CMakeLists.txt
+SDIST exact bytes PASS tests/vcpkg-consumer/main.cpp
+SDIST exact bytes PASS tests/vcpkg-consumer/peer.cpp
+ARTIFACT_SHA256 0ad5084cfa8a98cb9615ef9a91fc04b6692d43f4b833af512cdeb4ae66f1babb  dist/pde_solver_amr-0.1.0.tar.gz
+ARTIFACT_SHA256 ec103889ce6157224bb7d37533f1289f2d117300bbe993b3f760f76c85b230a0  dist/pde_solver_amr-0.1.0-cp312-cp312-linux_x86_64.whl
+Frozen authority, manifest and sealed c2c assets unchanged from local seal tree: PASS
+git diff --check: PASS
+Installed isolated-header Debug+Release compile/link PASS Checked.h
+Installed isolated-header Debug+Release compile/link PASS PDE.h
+Installed isolated-header Debug+Release compile/link PASS Domain.h
+Installed isolated-header Debug+Release compile/link PASS Types.h
+Installed isolated-header Debug+Release compile/link PASS Tridiagonal.h
+Installed isolated-header Debug+Release compile/link PASS Grid.h
+Installed isolated-header Debug+Release compile/link PASS Equation.h
+Installed isolated-header Debug+Release compile/link PASS Array.h
+Installed isolated-header Debug+Release compile/link PASS CrankNicholson1D.h
+Installed isolated-header Debug+Release compile/link PASS hello.h
+Installed two-TU solver consumer Debug+Release, source headers hidden and install relocated: PASS

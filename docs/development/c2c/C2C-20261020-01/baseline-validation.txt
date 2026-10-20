@@ -1,0 +1,425 @@
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/poetry install --no-root --no-ansi
+Creating virtualenv pde-solver-amr-2wsGfoyt-py3.12 in /root/.cache/pypoetry/virtualenvs
+Updating dependencies
+Resolving dependencies...
+
+Package operations: 4 installs, 0 updates, 0 removals
+
+  - Installing iniconfig (2.3.1)
+  - Installing packaging (26.3)
+  - Installing pluggy (1.7.0)
+  - Installing pytest (7.4.4)
+
+Writing lock file
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/cmake --preset linux-vcpkg-release -DCMAKE_MAKE_PROGRAM:FILEPATH=/workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/ninja -DVCPKG_OVERLAY_TRIPLETS:STRING=/workspace/scratch/3d04287114f0/target/.dev-tools/triplets -DPython_EXECUTABLE:FILEPATH=/workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/python
+Preset CMake variables:
+
+  BUILD_TESTING:BOOL="TRUE"
+  CMAKE_BUILD_TYPE="Release"
+  CMAKE_TOOLCHAIN_FILE="/workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
+
+-- Running vcpkg install
+Fetching registry information from https://github.com/microsoft/vcpkg (HEAD)...
+Detecting compiler hash for triplet x64-linux...
+Compiler found: /usr/bin/c++
+The following packages will be built and installed:
+    gtest:x64-linux@1.17.0#3 -- /workspace/scratch/3d04287114f0/baseline-check/vcpkg-ports/gtest
+  * vcpkg-cmake:x64-linux@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+  * vcpkg-cmake-config:x64-linux@2024-05-23 -- git+https://github.com/microsoft/vcpkg@97a63e4bc1a17422ffe4eff71da53b4b561a7841
+Additional packages (*) will be modified to complete this operation.
+Restored 0 package(s) from /root/.cache/vcpkg/archives in 8.15 us. Use --debug to see more details.
+Installing 1/3 vcpkg-cmake-config:x64-linux@2024-05-23...
+Building vcpkg-cmake-config:x64-linux@2024-05-23...
+/workspace/scratch/3d04287114f0/target/.dev-tools/triplets/x64-linux.cmake: info: loaded overlay triplet from here
+/root/.cache/vcpkg/registries/git-trees/97a63e4bc1a17422ffe4eff71da53b4b561a7841: info: installing from git registry git+https://github.com/microsoft/vcpkg@97a63e4bc1a17422ffe4eff71da53b4b561a7841
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/vcpkg-cmake-config_x64-linux/share/vcpkg-cmake-config/vcpkg_cmake_config_fixup.cmake
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/vcpkg-cmake-config_x64-linux/share/vcpkg-cmake-config/vcpkg-port-config.cmake
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/vcpkg-cmake-config_x64-linux/share/vcpkg-cmake-config/copyright
+-- Skipping post-build validation due to VCPKG_POLICY_EMPTY_PACKAGE
+Starting submission of vcpkg-cmake-config:x64-linux@2024-05-23 to 1 binary cache(s) in the background
+Elapsed time to handle vcpkg-cmake-config:x64-linux: 117 ms
+vcpkg-cmake-config:x64-linux package ABI: 24ce4bb6c4125348082c8c9fe375593f9a9f7254f9b12d5c680cb71f4de193bf
+Installing 2/3 vcpkg-cmake:x64-linux@2024-04-23...
+Building vcpkg-cmake:x64-linux@2024-04-23...
+/workspace/scratch/3d04287114f0/target/.dev-tools/triplets/x64-linux.cmake: info: loaded overlay triplet from here
+/root/.cache/vcpkg/registries/git-trees/e74aa1e8f93278a8e71372f1fa08c3df420eb840: info: installing from git registry git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/vcpkg_cmake_configure.cmake
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/vcpkg_cmake_build.cmake
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/vcpkg_cmake_install.cmake
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/vcpkg-port-config.cmake
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/copyright
+-- Performing post-build validation
+Starting submission of vcpkg-cmake:x64-linux@2024-04-23 to 1 binary cache(s) in the background
+Elapsed time to handle vcpkg-cmake:x64-linux: 103 ms
+vcpkg-cmake:x64-linux package ABI: 4dc367d184659b3fe878cb2c82ae9c15fa3b21fb25f507127544ec77a3e22517
+Completed submission of vcpkg-cmake-config:x64-linux@2024-05-23 to 1 binary cache(s) in 3.27 ms
+Installing 3/3 gtest:x64-linux@1.17.0#3...
+Building gtest:x64-linux@1.17.0#3...
+/workspace/scratch/3d04287114f0/target/.dev-tools/triplets/x64-linux.cmake: info: loaded overlay triplet from here
+/workspace/scratch/3d04287114f0/baseline-check/vcpkg-ports/gtest: info: installing overlay port from here
+Downloading https://github.com/google/googletest/archive/v1.17.0.tar.gz -> google-googletest-v1.17.0.tar.gz
+Successfully downloaded google-googletest-v1.17.0.tar.gz
+-- Extracting source /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/downloads/google-googletest-v1.17.0.tar.gz
+-- Applying patch 001-fix-UWP-death-test.patch
+-- Applying patch clang-tidy-no-lint.patch
+-- Applying patch fix-main-lib-path.patch
+-- Using source at /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/buildtrees/gtest/src/v1.17.0-08a64ef364.clean
+-- Configuring x64-linux
+-- Building x64-linux-dbg
+-- Building x64-linux-rel
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/src/gtest.cc
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/src/gtest_main.cc
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/src/gtest-all.cc
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/src/gtest-assertion-result.cc
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/src/gtest-death-test.cc
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/src/gtest-filepath.cc
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/src/gtest-internal-inl.h
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/src/gtest-matchers.cc
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/src/gtest-port.cc
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/src/gtest-printers.cc
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/src/gtest-test-part.cc
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/src/gtest-typed-test.cc
+-- Fixing pkgconfig file: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/lib/pkgconfig/gmock.pc
+-- Fixing pkgconfig file: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/lib/pkgconfig/gmock_main.pc
+-- Fixing pkgconfig file: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/lib/pkgconfig/gtest.pc
+-- Fixing pkgconfig file: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/lib/pkgconfig/gtest_main.pc
+-- Fixing pkgconfig file: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/debug/lib/pkgconfig/gmock.pc
+-- Fixing pkgconfig file: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/debug/lib/pkgconfig/gmock_main.pc
+-- Fixing pkgconfig file: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/debug/lib/pkgconfig/gtest.pc
+-- Fixing pkgconfig file: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/debug/lib/pkgconfig/gtest_main.pc
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/share/gtest/copyright
+-- Installing: /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux/share/gtest/usage
+Downloading https://github.com/NixOS/patchelf/releases/download/0.15.5/patchelf-0.15.5-x86_64.tar.gz -> patchelf-0.15.5-x86_64.tar.gz
+Successfully downloaded patchelf-0.15.5-x86_64.tar.gz
+-- Performing post-build validation
+/workspace/scratch/3d04287114f0/baseline-check/vcpkg-ports/gtest/portfile.cmake: warning: ${CURRENT_PACKAGES_DIR}/debug/include should not exist. To suppress this message, add set(VCPKG_POLICY_ALLOW_DEBUG_INCLUDE enabled)
+note: If this directory was created by a build system that does not allow installing headers in debug to be disabled, delete the duplicate directory with file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
+/workspace/scratch/3d04287114f0/baseline-check/vcpkg-ports/gtest/portfile.cmake: warning: This port installs the following CMake files in places CMake files are not expected. CMake files should be installed in ${CURRENT_PACKAGES_DIR}/share/${PORT}. To suppress this message, add set(VCPKG_POLICY_SKIP_MISPLACED_CMAKE_FILES_CHECK enabled)
+/workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/packages/gtest_x64-linux: note: the files are relative to ${CURRENT_PACKAGES_DIR} here
+note: debug/lib/cmake/GTest/GTestTargets.cmake
+note: debug/lib/cmake/GTest/GTestConfigVersion.cmake
+note: debug/lib/cmake/GTest/GTestConfig.cmake
+note: debug/lib/cmake/GTest/GTestTargets-debug.cmake
+/workspace/scratch/3d04287114f0/baseline-check/vcpkg-ports/gtest/portfile.cmake: warning: This port creates ${CURRENT_PACKAGES_DIR}/lib/cmake and/or ${CURRENT_PACKAGES_DIR}/debug/lib/cmake, which should be merged and moved to ${CURRENT_PACKAGES_DIR}/share/${PORT}/cmake. Please use the helper function vcpkg_cmake_config_fixup() from the port vcpkg-cmake-config. To suppress this message, add set(VCPKG_POLICY_SKIP_LIB_CMAKE_MERGE_CHECK enabled)
+/workspace/scratch/3d04287114f0/baseline-check/vcpkg-ports/gtest/portfile.cmake: warning: Found 3 post-build check problem(s). These are usually caused by bugs in portfile.cmake or the upstream build system. Please correct these before submitting this port to the curated registry.
+Starting submission of gtest:x64-linux@1.17.0#3 to 1 binary cache(s) in the background
+Elapsed time to handle gtest:x64-linux: 27 s
+gtest:x64-linux package ABI: 134393ec3fffe6e7abbc117ac80f9c86db47e6f09600cc2f8fe719468cd1efdd
+Installed contents are licensed to you by owners. Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Packages installed in this vcpkg installation declare the following licenses:
+BSD-3-Clause
+MIT
+The package gtest is compatible with built-in CMake targets:
+
+    enable_testing()
+
+    find_package(GTest CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+
+    add_test(AllTestsInMain main)
+
+Completed submission of vcpkg-cmake:x64-linux@2024-04-23 to 1 binary cache(s) in 3.65 ms
+Waiting for 1 remaining binary cache submissions...
+Completed submission of gtest:x64-linux@1.17.0#3 to 1 binary cache(s) in 381 ms (1/1)
+All requested installations completed successfully in: 28 s
+-- Running vcpkg install - done
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- pybind11 v3.0.1 
+-- Found Python: /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/python (found suitable version "3.12.14", minimum required is "3.8") found components: Interpreter Development.Module missing components: Development.Embed
+Using compatibility mode for Python, set PYBIND11_FINDPYTHON to NEW/OLD to silence this message
+-- Performing Test HAS_FLTO_AUTO
+-- Performing Test HAS_FLTO_AUTO - Success
+-- The C compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (55.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /workspace/scratch/3d04287114f0/baseline-check/build/linux-vcpkg-release
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/cmake --build --preset linux-release
+[0/2] Re-checking globbed directories...
+[1/9] Building CXX object cpp/CMakeFiles/pde_solver_amr_core_static.dir/src/hello.cpp.o
+[2/9] Linking CXX static library cpp/libpde_solver_amr_core_static.a
+[3/9] Building CXX object examples/cpp/CMakeFiles/demo.dir/demo.cpp.o
+[4/9] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/hello_test.cpp.o
+[5/9] Linking CXX executable examples/cpp/demo
+[6/9] Linking CXX executable tests/cpp/pde_solver_amr_core_test
+[7/9] Building CXX object cpp/CMakeFiles/pde_solver_amr_core.dir/bindings/hello_bindings.cpp.o
+[8/9] Linking CXX shared module /workspace/scratch/3d04287114f0/baseline-check/src/pde_solver_amr/pde_solver_amr_core.cpython-312-x86_64-linux-gnu.so
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/ctest --preset linux-release-tests --no-tests=error --verbose
+UpdateCTestConfiguration  from :/workspace/scratch/3d04287114f0/baseline-check/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/workspace/scratch/3d04287114f0/baseline-check/build/linux-vcpkg-release/DartConfiguration.tcl
+Parse Config file:/workspace/scratch/3d04287114f0/baseline-check/build/linux-vcpkg-release/DartConfiguration.tcl
+Test project /workspace/scratch/3d04287114f0/baseline-check/build/linux-vcpkg-release
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: pde_solver_amr_core_test
+
+1: Test command: /workspace/scratch/3d04287114f0/baseline-check/build/linux-vcpkg-release/tests/cpp/pde_solver_amr_core_test
+1: Working Directory: /workspace/scratch/3d04287114f0/baseline-check/build/linux-vcpkg-release/tests/cpp
+1: Test timeout computed to be: 1500
+1: [==========] Running 2 tests from 1 test suite.
+1: [----------] Global test environment set-up.
+1: [----------] 2 tests from HelloTest
+1: [ RUN      ] HelloTest.ReturnsCorrectString
+1: [       OK ] HelloTest.ReturnsCorrectString (0 ms)
+1: [ RUN      ] HelloTest.NotEmpty
+1: [       OK ] HelloTest.NotEmpty (0 ms)
+1: [----------] 2 tests from HelloTest (0 ms total)
+1: 
+1: [----------] Global test environment tear-down
+1: [==========] 2 tests from 1 test suite ran. (0 ms total)
+1: [  PASSED  ] 2 tests.
+1/1 Test #1: pde_solver_amr_core_test .........   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.00 sec
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/poetry run pytest tests/python
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-7.4.4, pluggy-1.7.0
+rootdir: /workspace/scratch/3d04287114f0/baseline-check
+collected 3 items
+
+tests/python/test_hello.py ...                                           [100%]
+
+============================== 3 passed in 0.01s ===============================
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/python -I -m build --no-isolation /workspace/scratch/3d04287114f0/baseline-check
+* Getting build dependencies for sdist...
+* Building sdist...
+* Building wheel from sdist
+* Getting build dependencies for wheel...
+* Building wheel...
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/cmake --preset linux-vcpkg-release -DPython_EXECUTABLE:FILEPATH=/workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/python -DCMAKE_MAKE_PROGRAM:FILEPATH=/workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/ninja -DVCPKG_OVERLAY_TRIPLETS:STRING=/workspace/scratch/3d04287114f0/target/.dev-tools/triplets
+Preset CMake variables:
+
+  BUILD_TESTING:BOOL="TRUE"
+  CMAKE_BUILD_TYPE="Release"
+  CMAKE_TOOLCHAIN_FILE="/workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
+
+-- Running vcpkg install
+Fetching registry information from https://github.com/microsoft/vcpkg (HEAD)...
+Detecting compiler hash for triplet x64-linux...
+Compiler found: /usr/bin/c++
+The following packages will be built and installed:
+    gtest:x64-linux@1.17.0#3 -- /tmp/build-via-sdist-fi9a9r05/pde_solver_amr-0.1.0/vcpkg-ports/gtest
+  * vcpkg-cmake:x64-linux@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+  * vcpkg-cmake-config:x64-linux@2024-05-23 -- git+https://github.com/microsoft/vcpkg@97a63e4bc1a17422ffe4eff71da53b4b561a7841
+Additional packages (*) will be modified to complete this operation.
+Restored 3 package(s) from /root/.cache/vcpkg/archives in 71.5 ms. Use --debug to see more details.
+Installing 1/3 vcpkg-cmake-config:x64-linux@2024-05-23...
+Elapsed time to handle vcpkg-cmake-config:x64-linux: 304 us
+vcpkg-cmake-config:x64-linux package ABI: 24ce4bb6c4125348082c8c9fe375593f9a9f7254f9b12d5c680cb71f4de193bf
+Installing 2/3 vcpkg-cmake:x64-linux@2024-04-23...
+Elapsed time to handle vcpkg-cmake:x64-linux: 183 us
+vcpkg-cmake:x64-linux package ABI: 4dc367d184659b3fe878cb2c82ae9c15fa3b21fb25f507127544ec77a3e22517
+Installing 3/3 gtest:x64-linux@1.17.0#3...
+Elapsed time to handle gtest:x64-linux: 4.29 ms
+gtest:x64-linux package ABI: 134393ec3fffe6e7abbc117ac80f9c86db47e6f09600cc2f8fe719468cd1efdd
+Installed contents are licensed to you by owners. Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Packages installed in this vcpkg installation declare the following licenses:
+BSD-3-Clause
+MIT
+The package gtest is compatible with built-in CMake targets:
+
+    enable_testing()
+
+    find_package(GTest CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+
+    add_test(AllTestsInMain main)
+
+All requested installations completed successfully in: 5.08 ms
+-- Running vcpkg install - done
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- pybind11 v3.0.1 
+-- Found Python: /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/python (found suitable version "3.12.14", minimum required is "3.8") found components: Interpreter Development.Module missing components: Development.Embed
+Using compatibility mode for Python, set PYBIND11_FINDPYTHON to NEW/OLD to silence this message
+-- Performing Test HAS_FLTO_AUTO
+-- Performing Test HAS_FLTO_AUTO - Success
+-- The C compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (18.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/build-via-sdist-fi9a9r05/pde_solver_amr-0.1.0/build/linux-vcpkg-release
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/cmake --build --preset linux-release
+[0/2] Re-checking globbed directories...
+[1/9] Building CXX object cpp/CMakeFiles/pde_solver_amr_core_static.dir/src/hello.cpp.o
+[2/9] Linking CXX static library cpp/libpde_solver_amr_core_static.a
+[3/9] Building CXX object examples/cpp/CMakeFiles/demo.dir/demo.cpp.o
+[4/9] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/hello_test.cpp.o
+[5/9] Linking CXX executable examples/cpp/demo
+[6/9] Linking CXX executable tests/cpp/pde_solver_amr_core_test
+[7/9] Building CXX object cpp/CMakeFiles/pde_solver_amr_core.dir/bindings/hello_bindings.cpp.o
+[8/9] Linking CXX shared module /tmp/build-via-sdist-fi9a9r05/pde_solver_amr-0.1.0/src/pde_solver_amr/pde_solver_amr_core.cpython-312-x86_64-linux-gnu.so
+Successfully built pde_solver_amr-0.1.0.tar.gz and pde_solver_amr-0.1.0-cp312-cp312-linux_x86_64.whl
++ /tmp/wheel-install-pne08nmk/venv/bin/python -m pip install --no-deps /workspace/scratch/3d04287114f0/baseline-check/dist/pde_solver_amr-0.1.0-cp312-cp312-linux_x86_64.whl
+Processing /workspace/scratch/3d04287114f0/baseline-check/dist/pde_solver_amr-0.1.0-cp312-cp312-linux_x86_64.whl
+Installing collected packages: pde-solver-amr
+Successfully installed pde-solver-amr-0.1.0
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.2
+[notice] To update, run: /tmp/wheel-install-pne08nmk/venv/bin/python -m pip install --upgrade pip
++ /tmp/wheel-install-pne08nmk/venv/bin/python -I -c "import pde_solver_amr as package; assert package.hello() == 'Hello, World!'; print(package.__file__)"
+/tmp/wheel-install-pne08nmk/venv/lib/python3.12/site-packages/pde_solver_amr/__init__.py
++ /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/vcpkg install --x-manifest-root=/tmp/vcpkg-consumer-vcxw_383/static --x-install-root=/tmp/vcpkg-consumer-vcxw_383/static/vcpkg_installed --overlay-ports=/workspace/scratch/3d04287114f0/baseline-check/vcpkg-ports --overlay-triplets=/tmp/vcpkg-consumer-vcxw_383/triplets --triplet=x64-packaging-static --x-buildtrees-root=/tmp/vcpkg-consumer-vcxw_383/static/buildtrees --x-packages-root=/tmp/vcpkg-consumer-vcxw_383/static/packages --binarysource=clear
+Fetching registry information from https://github.com/microsoft/vcpkg (HEAD)...
+Detecting compiler hash for triplet x64-linux...
+Compiler found: /usr/bin/c++
+Detecting compiler hash for triplet x64-packaging-static...
+Compiler found: /usr/bin/c++
+The following packages will be built and installed:
+    pde-solver-amr-core:x64-packaging-static@0.1.0 -- /workspace/scratch/3d04287114f0/baseline-check/vcpkg-ports/pde-solver-amr-core
+  * vcpkg-cmake:x64-linux@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+  * vcpkg-cmake-config:x64-linux@2024-05-23 -- git+https://github.com/microsoft/vcpkg@97a63e4bc1a17422ffe4eff71da53b4b561a7841
+Additional packages (*) will be modified to complete this operation.
+Installing 1/3 vcpkg-cmake-config:x64-linux@2024-05-23...
+Building vcpkg-cmake-config:x64-linux@2024-05-23...
+/tmp/vcpkg-consumer-vcxw_383/triplets/x64-linux.cmake: info: loaded overlay triplet from here
+/root/.cache/vcpkg/registries/git-trees/97a63e4bc1a17422ffe4eff71da53b4b561a7841: info: installing from git registry git+https://github.com/microsoft/vcpkg@97a63e4bc1a17422ffe4eff71da53b4b561a7841
+-- Installing: /tmp/vcpkg-consumer-vcxw_383/static/packages/vcpkg-cmake-config_x64-linux/share/vcpkg-cmake-config/vcpkg_cmake_config_fixup.cmake
+-- Installing: /tmp/vcpkg-consumer-vcxw_383/static/packages/vcpkg-cmake-config_x64-linux/share/vcpkg-cmake-config/vcpkg-port-config.cmake
+-- Installing: /tmp/vcpkg-consumer-vcxw_383/static/packages/vcpkg-cmake-config_x64-linux/share/vcpkg-cmake-config/copyright
+-- Skipping post-build validation due to VCPKG_POLICY_EMPTY_PACKAGE
+Elapsed time to handle vcpkg-cmake-config:x64-linux: 138 ms
+vcpkg-cmake-config:x64-linux package ABI: 24ce4bb6c4125348082c8c9fe375593f9a9f7254f9b12d5c680cb71f4de193bf
+Installing 2/3 vcpkg-cmake:x64-linux@2024-04-23...
+Building vcpkg-cmake:x64-linux@2024-04-23...
+/tmp/vcpkg-consumer-vcxw_383/triplets/x64-linux.cmake: info: loaded overlay triplet from here
+/root/.cache/vcpkg/registries/git-trees/e74aa1e8f93278a8e71372f1fa08c3df420eb840: info: installing from git registry git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+-- Installing: /tmp/vcpkg-consumer-vcxw_383/static/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/vcpkg_cmake_configure.cmake
+-- Installing: /tmp/vcpkg-consumer-vcxw_383/static/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/vcpkg_cmake_build.cmake
+-- Installing: /tmp/vcpkg-consumer-vcxw_383/static/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/vcpkg_cmake_install.cmake
+-- Installing: /tmp/vcpkg-consumer-vcxw_383/static/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/vcpkg-port-config.cmake
+-- Installing: /tmp/vcpkg-consumer-vcxw_383/static/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/copyright
+-- Performing post-build validation
+Elapsed time to handle vcpkg-cmake:x64-linux: 134 ms
+vcpkg-cmake:x64-linux package ABI: 4dc367d184659b3fe878cb2c82ae9c15fa3b21fb25f507127544ec77a3e22517
+Installing 3/3 pde-solver-amr-core:x64-packaging-static@0.1.0...
+Building pde-solver-amr-core:x64-packaging-static@0.1.0...
+/tmp/vcpkg-consumer-vcxw_383/triplets/x64-packaging-static.cmake: info: loaded overlay triplet from here
+/workspace/scratch/3d04287114f0/baseline-check/vcpkg-ports/pde-solver-amr-core: info: installing overlay port from here
+-- Configuring x64-packaging-static
+-- Building x64-packaging-static-dbg
+-- Building x64-packaging-static-rel
+-- Installing: /tmp/vcpkg-consumer-vcxw_383/static/packages/pde-solver-amr-core_x64-packaging-static/share/pde-solver-amr-core/copyright
+-- Performing post-build validation
+Elapsed time to handle pde-solver-amr-core:x64-packaging-static: 766 ms
+pde-solver-amr-core:x64-packaging-static package ABI: 9665add508c9fc8a89c2dbee4ad437d705948f6c3c3b54e274dabb75e3feca23
+Installed contents are licensed to you by owners. Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Packages installed in this vcpkg installation declare the following licenses:
+MIT
+pde-solver-amr-core provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(pde_solver_amr_core CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE pde_solver_amr_core::core)
+
+All requested installations completed successfully in: 1 s
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/cmake -S /tmp/vcpkg-consumer-vcxw_383/static -B /tmp/vcpkg-consumer-vcxw_383/static/build-Release -G Ninja -DCMAKE_MAKE_PROGRAM:FILEPATH=/workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=/workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_INSTALLED_DIR=/tmp/vcpkg-consumer-vcxw_383/static/relocated-installed -DVCPKG_TARGET_TRIPLET=x64-packaging-static -DVCPKG_MANIFEST_INSTALL=OFF -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF -DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=OFF -DEXPECTED_PREFIX=/tmp/vcpkg-consumer-vcxw_383/static/relocated-installed/x64-packaging-static -DEXPECTED_LINKAGE=static
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Installed INTERFACE_INCLUDE_DIRECTORIES: /tmp/vcpkg-consumer-vcxw_383/static/relocated-installed/x64-packaging-static/include
+-- Installed IMPORTED_LOCATION_DEBUG: /tmp/vcpkg-consumer-vcxw_383/static/relocated-installed/x64-packaging-static/debug/lib/libpde_solver_amr_core_static.a
+-- Installed IMPORTED_LOCATION_RELEASE: /tmp/vcpkg-consumer-vcxw_383/static/relocated-installed/x64-packaging-static/lib/libpde_solver_amr_core_static.a
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/vcpkg-consumer-vcxw_383/static/build-Release
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/cmake --build /tmp/vcpkg-consumer-vcxw_383/static/build-Release --config Release
+[1/2] Building CXX object CMakeFiles/consumer.dir/main.cpp.o
+[2/2] Linking CXX executable consumer
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/ctest --test-dir /tmp/vcpkg-consumer-vcxw_383/static/build-Release -C Release --no-tests=error --verbose
+Internal ctest changing into directory: /tmp/vcpkg-consumer-vcxw_383/static/build-Release
+UpdateCTestConfiguration  from :/tmp/vcpkg-consumer-vcxw_383/static/build-Release/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/tmp/vcpkg-consumer-vcxw_383/static/build-Release/DartConfiguration.tcl
+Test project /tmp/vcpkg-consumer-vcxw_383/static/build-Release
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: consumer
+
+1: Test command: /tmp/vcpkg-consumer-vcxw_383/static/build-Release/consumer
+1: Working Directory: /tmp/vcpkg-consumer-vcxw_383/static/build-Release
+1: Test timeout computed to be: 10000000
+1: Hello, World!
+1/1 Test #1: consumer .........................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.00 sec
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/cmake -S /tmp/vcpkg-consumer-vcxw_383/static -B /tmp/vcpkg-consumer-vcxw_383/static/build-Debug -G Ninja -DCMAKE_MAKE_PROGRAM:FILEPATH=/workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=/workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_INSTALLED_DIR=/tmp/vcpkg-consumer-vcxw_383/static/relocated-installed -DVCPKG_TARGET_TRIPLET=x64-packaging-static -DVCPKG_MANIFEST_INSTALL=OFF -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF -DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=OFF -DEXPECTED_PREFIX=/tmp/vcpkg-consumer-vcxw_383/static/relocated-installed/x64-packaging-static -DEXPECTED_LINKAGE=static
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Installed INTERFACE_INCLUDE_DIRECTORIES: /tmp/vcpkg-consumer-vcxw_383/static/relocated-installed/x64-packaging-static/include
+-- Installed IMPORTED_LOCATION_DEBUG: /tmp/vcpkg-consumer-vcxw_383/static/relocated-installed/x64-packaging-static/debug/lib/libpde_solver_amr_core_static.a
+-- Installed IMPORTED_LOCATION_RELEASE: /tmp/vcpkg-consumer-vcxw_383/static/relocated-installed/x64-packaging-static/lib/libpde_solver_amr_core_static.a
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/vcpkg-consumer-vcxw_383/static/build-Debug
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/cmake --build /tmp/vcpkg-consumer-vcxw_383/static/build-Debug --config Debug
+[1/2] Building CXX object CMakeFiles/consumer.dir/main.cpp.o
+[2/2] Linking CXX executable consumer
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/ctest --test-dir /tmp/vcpkg-consumer-vcxw_383/static/build-Debug -C Debug --no-tests=error --verbose
+Internal ctest changing into directory: /tmp/vcpkg-consumer-vcxw_383/static/build-Debug
+UpdateCTestConfiguration  from :/tmp/vcpkg-consumer-vcxw_383/static/build-Debug/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/tmp/vcpkg-consumer-vcxw_383/static/build-Debug/DartConfiguration.tcl
+Test project /tmp/vcpkg-consumer-vcxw_383/static/build-Debug
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: consumer
+
+1: Test command: /tmp/vcpkg-consumer-vcxw_383/static/build-Debug/consumer
+1: Working Directory: /tmp/vcpkg-consumer-vcxw_383/static/build-Debug
+1: Test timeout computed to be: 10000000
+1: Hello, World!
+1/1 Test #1: consumer .........................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.00 sec
+vcpkg consumer passed: static triplet -> static library, Release + Debug, relocated install, source headers hidden.
+Project validation passed.

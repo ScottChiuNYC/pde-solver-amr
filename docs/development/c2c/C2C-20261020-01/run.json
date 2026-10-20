@@ -1,0 +1,120 @@
+{
+  "run_id": "C2C-20261020-01",
+  "stage": "IMPLEMENTING",
+  "governing_skill_revision": "9d1845f509a88dc8aad2f825f41a7009c3e77d6c",
+  "baseline_repo_SHA": "476b783142fbf15068f7fe3a677fb05b4498d0d3",
+  "baseline_tree_SHA": "a25d1aca87d1a6d1051655554703a9d2cab0d2e7",
+  "essence_path": "docs/development/essence.md",
+  "essence_blob_SHA": "7e2b3dff6feb858f5ad3d10667a202cdd137a486",
+  "boundary_path": "docs/development/PROJECT_SKELETON_CONTRACT.md",
+  "boundary_blob_SHA": "ea132670b7f8925e8eb842c96c406fa26f8b164b",
+  "selection_reason": "Owner explicit path; exact baseline FROZEN, provenance reconciliation #25",
+  "backend": "github",
+  "issue": 26,
+  "branch": "c2c/20261020-independent",
+  "merge_policy": "Owner authorized squash merge after required exit criteria",
+  "isolation": {
+    "mechanism": "Native collaboration workers; fork_turns=none; explicitly delivered input paths",
+    "achieved": "fresh-context plus controlled-input delivery",
+    "limitation": "Shared tools/filesystem; no enforced tool-access isolation"
+  },
+  "roles": {
+    "dispatcher": "/root",
+    "acceptance_analyst": "/root/acceptance",
+    "implementer": "/root/implementer"
+  },
+  "evidence": [
+    {
+      "role": "dispatcher",
+      "candidate_SHA": "476b783142fbf15068f7fe3a677fb05b4498d0d3",
+      "command": "PROJECT_DEV_TOOLS=<target>/.dev-tools python baseline-check/scripts/validate.py --wheel",
+      "exit_status": 0,
+      "location": "docs/development/c2c/C2C-20261020-01/baseline-validation.txt",
+      "sha256": "cd3b372029274920c09f31171eff5aaf36c37fdd55726b034a7dd699d52ddf03",
+      "limitations": "Linux GNU13.3 local; exact source tree independently materialized; local snapshot commit synthetic. Remote baseline Linux/Windows run 39476253576 separately verified."
+    },
+    {
+      "role": "implementer",
+      "candidate_SHA": "Pending mechanical publication; source bytes bound by implementation-source-sha256.txt and subsequent remote exact tree readback",
+      "location": "docs/development/c2c/C2C-20261020-01/implementation-artifact-inspection.txt",
+      "sha256": "eeca4d0a7f333f2915bbd79a6e301b46b55c763d1d9cd0352711bb4c43d419e8",
+      "exit_status": "See retained complete record",
+      "limitations": "Local prepublication evidence; final candidate CI/reviewer/verifier remain required"
+    },
+    {
+      "role": "implementer",
+      "candidate_SHA": "Pending mechanical publication; source bytes bound by implementation-source-sha256.txt and subsequent remote exact tree readback",
+      "location": "docs/development/c2c/C2C-20261020-01/implementation-focused.txt",
+      "sha256": "fa9315276d9121d3ea98dbd3b047801f43bf74b69ce3a00b88854968077203b1",
+      "exit_status": "See retained complete record",
+      "limitations": "Local prepublication evidence; final candidate CI/reviewer/verifier remain required"
+    },
+    {
+      "role": "implementer",
+      "candidate_SHA": "Pending mechanical publication; source bytes bound by implementation-source-sha256.txt and subsequent remote exact tree readback",
+      "location": "docs/development/c2c/C2C-20261020-01/implementation-inspection.md",
+      "sha256": "44f07b7a6ef2d1aa370025aedc3fafd7f13d5f5f5e5f18d8a4155ecaebaf151b",
+      "exit_status": "See retained complete record",
+      "limitations": "Local prepublication evidence; final candidate CI/reviewer/verifier remain required"
+    },
+    {
+      "role": "implementer",
+      "candidate_SHA": "Pending mechanical publication; source bytes bound by implementation-source-sha256.txt and subsequent remote exact tree readback",
+      "location": "docs/development/c2c/C2C-20261020-01/implementation-phases.txt",
+      "sha256": "b41268467b37018ca0030546fbc62303dae8edb9087d50497630c9a32ee843a5",
+      "exit_status": "See retained complete record",
+      "limitations": "Local prepublication evidence; final candidate CI/reviewer/verifier remain required"
+    },
+    {
+      "role": "implementer",
+      "candidate_SHA": "Pending mechanical publication; source bytes bound by implementation-source-sha256.txt and subsequent remote exact tree readback",
+      "location": "docs/development/c2c/C2C-20261020-01/implementation-source-sha256.txt",
+      "sha256": "28bbdec8f1782edeb778f06446bee476f358f66cbd953d7681c5743d1812a4c5",
+      "exit_status": "See retained complete record",
+      "limitations": "Local prepublication evidence; final candidate CI/reviewer/verifier remain required"
+    },
+    {
+      "role": "implementer",
+      "candidate_SHA": "Pending mechanical publication; source bytes bound by implementation-source-sha256.txt and subsequent remote exact tree readback",
+      "location": "docs/development/c2c/C2C-20261020-01/implementation-validation-initial.txt",
+      "sha256": "f3fff017a43346455bc196e759d23b9639a63464d51f08af13a66992c57e3bd6",
+      "exit_status": "See retained complete record",
+      "limitations": "Local prepublication evidence; final candidate CI/reviewer/verifier remain required"
+    },
+    {
+      "role": "implementer",
+      "candidate_SHA": "Pending mechanical publication; source bytes bound by implementation-source-sha256.txt and subsequent remote exact tree readback",
+      "location": "docs/development/c2c/C2C-20261020-01/implementation-validation.txt",
+      "sha256": "f73c8f48ceab680c8b75fbda68944c92c0195b00d3507f1ca070aec2a02a9311",
+      "exit_status": 0,
+      "limitations": "Local prepublication evidence; final candidate CI/reviewer/verifier remain required"
+    }
+  ],
+  "acceptance_seal": {
+    "version": 1,
+    "timestamp": "2026-10-20T19:25:59.783668+00:00",
+    "manifest_sha256": "a254801ab0f28a276bcb704ca99ff52f9b0e5548e68edda1bca2c39593f1f709",
+    "assets": {
+      "docs/development/c2c/C2C-20261020-01/acceptance-manifest.md": "a254801ab0f28a276bcb704ca99ff52f9b0e5548e68edda1bca2c39593f1f709",
+      "tests/cpp/c2c_acceptance_support.h": "c3e6eefb01052d1edcfb76e2b39b0ae7928b13c7c91d427e8678a76a146f2fa6",
+      "tests/cpp/c2c_amr_acceptance.cpp": "8413cd04bc7462ecaf94d8e6e980f4a4dd1fb10e9ff0d65b362309a763b4b7af",
+      "tests/cpp/c2c_amr_oracle.h": "6709719643abdbb6dfb56d1a52a6a6cec8d5d1700864bf217f04d8fb0e8a88e7",
+      "tests/cpp/c2c_callbacks_acceptance.cpp": "2fd454f963e63469c62356baa76199674e2ee006d82f14a5a4f5f2c7a1fd4648",
+      "tests/cpp/c2c_helpers_acceptance.cpp": "8692a8dd34e3ea3bd81853b26853a75428751e77e103538b3f893412be222de9",
+      "tests/cpp/c2c_multitu_acceptance.cpp": "3c47981a7a0e841f36c6959685b1229af1131a1087bb163850c7c7f6c2f0f2e8",
+      "tests/cpp/c2c_multitu_peer.cpp": "7406498bec588400b931f6f03a4dfcf2172fd5a79a3679e2203738493c5e9c07",
+      "tests/cpp/c2c_numerical_acceptance.cpp": "a7ca3bd58af17a864a5825da5a523c7250b51cdc8970dba415ff8b0fdeec6b74",
+      "tests/cpp/c2c_precode_check.py": "0cec2a286a6a587857297db0ce97643563b7bd94f3ed163108fa1f7eea6b78ef",
+      "tests/cpp/c2c_precode_validation.txt": "b71d232f105dedf58ebcb8561a832488c825e9fbc4ffad7a99d34018f17bf5ed",
+      "tests/cpp/c2c_thomas_acceptance.cpp": "3a3d48f2f7927484853852ce960660b26fc1c7d5c159f6c18cb54b726a6a8b82"
+    },
+    "dispatcher_check": "Read complete manifest, confirmed authority references, criteria and explicit source/artifact obligations; no implementation started. Durable exact readback required before delegation.",
+    "remote_commit": "d59a897badba8c1ebed95758c3f7c597886f46bd",
+    "remote_tree": "8f0ad4cfc82cd891643e89bbad9b2e3c06ab9834",
+    "readback": "All 14 complete files fetched by exact commit and byte-equal before Implementer launch"
+  },
+  "findings": [],
+  "owner_decisions": [],
+  "canonical_state_location": "GitHub issue #26 is the authoritative append-only stage/candidate/findings/verification/merge journal after this publication snapshot.",
+  "implementation_handoff": "Complete local implementation and canonical validation PASS. No Implementer edits after handoff. Exact candidate and remote readback recorded in issue #26."
+}

@@ -1,6 +1,34 @@
 # pde_solver_amr
 
-Poetry + pybind11 + CMake + vcpkg + GoogleTest + pytest.
+Header-only C++17 solver for one-dimensional parabolic PDEs with Dirichlet boundaries, a fixed time grid, and optional spatial refinement/coarsening. The theta scheme supports Crank–Nicolson (`theta=0.5`, the default) through backward Euler (`theta=1`) and uses checked Thomas elimination.
+
+```cpp
+#include <pde_solver_amr_core/PDE.h>
+#include <cmath>
+
+int main() {
+    const double pi = std::acos(-1.0);
+    PDE::Domain1D domain(0, 1, 0, 0.1);
+    PDE::Grid1D grid(domain, 101, 1000);
+    PDE::PDE1D pde; // diffusion=1; advection/reaction/source=0
+    pde.initial = [pi](double, double x) { return std::sin(pi*x); };
+    pde.boundaryL = pde.boundaryR = [](double, double) { return 0.0; };
+    auto solver = PDE::makeSolver1D(grid, pde);
+    auto uniform = solver.solve();
+
+    PDE::SolveOptions1D options;
+    options.mesh_mode = PDE::MeshMode::Adaptive;
+    options.amr = PDE::AMROptions{3, 2049, 1e-4, 2e-5};
+    auto adaptive = solver.solve(options);
+    return uniform.size() == grid.nx() && adaptive.x.size() == adaptive.values.size() ? 0 : 1;
+}
+```
+
+The solver retains references to the grid and PDE: keep both alive, along with objects referenced by their callbacks, for every solve. Returned arrays and `Solution1D` own their storage. `solve(SolveOptions1D{})` returns the uniform values plus coordinates and an empty event list; its optional AMR controls are ignored. Adaptive results include chronological accepted split/merge events and a sticky `refinement_limited` flag when the depth or all-or-none node cap blocks refinement. Refinement tolerances control a solution-curvature heuristic; they do not bound PDE error. The uniform second-order spatial convergence claim does not extend to arbitrary adaptive meshes.
+
+All callbacks take `(t,x)` and must return finite values; sampled diffusion must be positive. Missing callbacks, unsupported boundaries/options, invalid geometry, and unusable pivots throw `std::runtime_error` with context. User callback exceptions propagate unchanged. Initial endpoint values come from Dirichlet callbacks. Arithmetic follows checked binary64 round-to-nearest operations with gradual underflow; builds that change that arithmetic model are outside these assumptions. The solver uses exactly the original fixed time grid. See [the numerical contract](docs/development/essence.md) for the full API and precise sampling/arithmetic rules, and [the executable example](examples/cpp/demo.cpp) for adaptive output.
+
+The existing Python package retains its scaffold `hello()` API; the PDE solver is a C++ library.
 
 ## Reproducible setup and validation
 
@@ -43,7 +71,7 @@ The regular presets build the C++ static core, the pybind11 extension and the ex
 
 The local port is `vcpkg-ports/pde-solver-amr-core`. Its `vcpkg.json` describes the library to install and depends only on vcpkg CMake helpers. The root `vcpkg.json` continues to describe development dependencies such as GoogleTest; it is not the port manifest. Keep the port inside this source checkout: it locates the library using `../..`, builds the current working tree, and installs no tests or examples. Future production dependencies must also be declared in the port and its exported config where appropriate.
 
-The core is always static. `vcpkg_check_linkage(ONLY_STATIC_LIBRARY)` keeps it static even for a dynamic library triplet such as `x64-windows`; CRT linkage still follows that triplet. The port passes `BUILD_PYTHON_BINDINGS=OFF`, so it never discovers Python or fetches pybind11. Normal builds retain the extension and Poetry hook.
+The core is always static. `vcpkg_check_linkage(ONLY_STATIC_LIBRARY)` keeps it static even for a dynamic library triplet such as `x64-windows`; CRT linkage still follows that triplet. The port passes `BUILD_PYTHON_BINDINGS=OFF`, so it never discovers Python or fetches pybind11. Normal builds retain the extension and Poetry hook. The independent consumer runs uniform and adaptive solves in two translation units and compiles every installed public header by itself in both configurations.
 
 To test packaging alone after bootstrap:
 
