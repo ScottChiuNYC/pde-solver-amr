@@ -1,0 +1,505 @@
+Tue Oct 20 19:31:47 UTC 2026
+Candidate identity: pending-local-implementation (uncommitted tree based on sealed remote acceptance d59a897badba8c1ebed95758c3f7c597886f46bd; synthetic local HEAD is not remote provenance)
+9b9743539ef1561ed516c71522497eb042ae491e
+7e2b3dff6feb858f5ad3d10667a202cdd137a486
+ea132670b7f8925e8eb842c96c406fa26f8b164b
+a254801ab0f28a276bcb704ca99ff52f9b0e5548e68edda1bca2c39593f1f709  docs/development/c2c/C2C-20261020-01/acceptance-manifest.md
+COMMAND: C2C_SOURCE_REVISION=pending-local-implementation python scripts/validate.py --wheel
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/poetry install --no-root --no-ansi
+Creating virtualenv pde-solver-amr-7eaUbfQ--py3.12 in /root/.cache/pypoetry/virtualenvs
+Updating dependencies
+Resolving dependencies...
+
+Package operations: 4 installs, 0 updates, 0 removals
+
+  - Installing iniconfig (2.3.1)
+  - Installing packaging (26.3)
+  - Installing pluggy (1.7.0)
+  - Installing pytest (7.4.4)
+
+Writing lock file
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/cmake --preset linux-vcpkg-release -DCMAKE_MAKE_PROGRAM:FILEPATH=/workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/ninja -DVCPKG_OVERLAY_TRIPLETS:STRING=/workspace/scratch/3d04287114f0/target/.dev-tools/triplets -DPython_EXECUTABLE:FILEPATH=/workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/python
+Preset CMake variables:
+
+  BUILD_TESTING:BOOL="TRUE"
+  CMAKE_BUILD_TYPE="Release"
+  CMAKE_TOOLCHAIN_FILE="/workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
+
+-- Running vcpkg install
+Fetching registry information from https://github.com/microsoft/vcpkg (HEAD)...
+Detecting compiler hash for triplet x64-linux...
+Compiler found: /usr/bin/c++
+The following packages will be built and installed:
+    gtest:x64-linux@1.17.0#3 -- /workspace/scratch/3d04287114f0/target/vcpkg-ports/gtest
+  * vcpkg-cmake:x64-linux@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+  * vcpkg-cmake-config:x64-linux@2024-05-23 -- git+https://github.com/microsoft/vcpkg@97a63e4bc1a17422ffe4eff71da53b4b561a7841
+Additional packages (*) will be modified to complete this operation.
+Restored 3 package(s) from /root/.cache/vcpkg/archives in 70.6 ms. Use --debug to see more details.
+Installing 1/3 vcpkg-cmake-config:x64-linux@2024-05-23...
+Elapsed time to handle vcpkg-cmake-config:x64-linux: 307 us
+vcpkg-cmake-config:x64-linux package ABI: 24ce4bb6c4125348082c8c9fe375593f9a9f7254f9b12d5c680cb71f4de193bf
+Installing 2/3 vcpkg-cmake:x64-linux@2024-04-23...
+Elapsed time to handle vcpkg-cmake:x64-linux: 227 us
+vcpkg-cmake:x64-linux package ABI: 4dc367d184659b3fe878cb2c82ae9c15fa3b21fb25f507127544ec77a3e22517
+Installing 3/3 gtest:x64-linux@1.17.0#3...
+Elapsed time to handle gtest:x64-linux: 1.81 ms
+gtest:x64-linux package ABI: 134393ec3fffe6e7abbc117ac80f9c86db47e6f09600cc2f8fe719468cd1efdd
+Installed contents are licensed to you by owners. Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Packages installed in this vcpkg installation declare the following licenses:
+BSD-3-Clause
+MIT
+The package gtest is compatible with built-in CMake targets:
+
+    enable_testing()
+
+    find_package(GTest CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+
+    add_test(AllTestsInMain main)
+
+All requested installations completed successfully in: 2.85 ms
+-- Running vcpkg install - done
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- pybind11 v3.0.1 
+-- Found Python: /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/python (found suitable version "3.12.14", minimum required is "3.8") found components: Interpreter Development.Module missing components: Development.Embed
+Using compatibility mode for Python, set PYBIND11_FINDPYTHON to NEW/OLD to silence this message
+-- Performing Test HAS_FLTO_AUTO
+-- Performing Test HAS_FLTO_AUTO - Success
+-- The C compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (13.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /workspace/scratch/3d04287114f0/target/build/linux-vcpkg-release
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/cmake --build --preset linux-release
+[0/2] Re-checking globbed directories...
+[1/17] Building CXX object cpp/CMakeFiles/pde_solver_amr_core_static.dir/src/hello.cpp.o
+[2/17] Linking CXX static library cpp/libpde_solver_amr_core_static.a
+[3/17] Building CXX object cpp/CMakeFiles/pde_solver_amr_core.dir/bindings/hello_bindings.cpp.o
+[4/17] Building CXX object examples/cpp/CMakeFiles/demo.dir/demo.cpp.o
+[5/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/c2c_callbacks_acceptance.cpp.o
+[6/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/c2c_amr_acceptance.cpp.o
+[7/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/c2c_helpers_acceptance.cpp.o
+[8/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/c2c_multitu_acceptance.cpp.o
+[9/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/c2c_multitu_peer.cpp.o
+[10/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/c2c_numerical_acceptance.cpp.o
+[11/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/c2c_thomas_acceptance.cpp.o
+[12/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/hello_test.cpp.o
+[13/17] Linking CXX shared module /workspace/scratch/3d04287114f0/target/src/pde_solver_amr/pde_solver_amr_core.cpython-312-x86_64-linux-gnu.so
+[14/17] Linking CXX executable examples/cpp/demo
+[15/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/implementation_test.cpp.o
+[16/17] Linking CXX executable tests/cpp/pde_solver_amr_core_test
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/ctest --preset linux-release-tests --no-tests=error --verbose
+UpdateCTestConfiguration  from :/workspace/scratch/3d04287114f0/target/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/workspace/scratch/3d04287114f0/target/build/linux-vcpkg-release/DartConfiguration.tcl
+Parse Config file:/workspace/scratch/3d04287114f0/target/build/linux-vcpkg-release/DartConfiguration.tcl
+Test project /workspace/scratch/3d04287114f0/target/build/linux-vcpkg-release
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: pde_solver_amr_core_test
+
+1: Test command: /workspace/scratch/3d04287114f0/target/build/linux-vcpkg-release/tests/cpp/pde_solver_amr_core_test
+1: Working Directory: /workspace/scratch/3d04287114f0/target/build/linux-vcpkg-release/tests/cpp
+1: Test timeout computed to be: 1500
+1: [==========] Running 32 tests from 9 test suites.
+1: [----------] Global test environment set-up.
+1: [----------] 4 tests from C2C_AMR
+1: [ RUN      ] C2C_AMR.UniformIdentityAndIgnoredAMR
+1: [       OK ] C2C_AMR.UniformIdentityAndIgnoredAMR (3 ms)
+1: [ RUN      ] C2C_AMR.OptionsBeforeCallbacks
+1: [       OK ] C2C_AMR.OptionsBeforeCallbacks (0 ms)
+1: [ RUN      ] C2C_AMR.ExistingAnalyticFixturesAgainstIndependentMeshAndStepOracle
+1: AMR descriptive fixture=0 theta=0.5 Einf=0.0125979 trapezoidal_L2=0.00684788 events=8
+1: AMR descriptive fixture=0 theta=0.75 Einf=0.00881949 trapezoidal_L2=0.00635321 events=8
+1: AMR descriptive fixture=0 theta=1 Einf=0.00966829 trapezoidal_L2=0.00706657 events=8
+1: AMR descriptive fixture=1 theta=0.5 Einf=2.58134e-05 trapezoidal_L2=1.89735e-05 events=4
+1: AMR descriptive fixture=1 theta=0.75 Einf=0.00112886 trapezoidal_L2=0.000828597 events=4
+1: AMR descriptive fixture=1 theta=1 Einf=0.00218724 trapezoidal_L2=0.00160541 events=4
+1: AMR descriptive fixture=2 theta=0.5 Einf=5.3966e-06 trapezoidal_L2=3.83569e-06 events=4
+1: AMR descriptive fixture=2 theta=0.75 Einf=0.000315178 trapezoidal_L2=0.000224054 events=4
+1: AMR descriptive fixture=2 theta=1 Einf=0.000598569 trapezoidal_L2=0.00042558 events=4
+1: AMR descriptive fixture=3 theta=0.5 Einf=0.000633306 trapezoidal_L2=0.000447806 events=12
+1: AMR descriptive fixture=3 theta=0.75 Einf=0.00630288 trapezoidal_L2=0.00445681 events=12
+1: AMR descriptive fixture=3 theta=1 Einf=0.0135307 trapezoidal_L2=0.00956788 events=12
+1: AMR descriptive fixture=3 theta=0.5 Einf=4.05979e-05 trapezoidal_L2=2.87071e-05 events=16
+1: AMR descriptive fixture=3 theta=0.75 Einf=0.00554895 trapezoidal_L2=0.0039237 events=16
+1: AMR descriptive fixture=3 theta=1 Einf=0.0126257 trapezoidal_L2=0.00892796 events=16
+1: AMR descriptive fixture=0 theta=0.5 Einf=0.0347471 trapezoidal_L2=0.0244947 events=0
+1: AMR descriptive fixture=0 theta=0.75 Einf=0.0353165 trapezoidal_L2=0.0249172 events=0
+1: AMR descriptive fixture=0 theta=1 Einf=0.0358338 trapezoidal_L2=0.0253028 events=0
+1: AMR descriptive fixture=0 theta=0.5 Einf=0.0347471 trapezoidal_L2=0.0244947 events=0
+1: AMR descriptive fixture=0 theta=0.75 Einf=0.0353165 trapezoidal_L2=0.0249172 events=0
+1: AMR descriptive fixture=0 theta=1 Einf=0.0358338 trapezoidal_L2=0.0253028 events=0
+1: AMR descriptive fixture=0 theta=0.5 Einf=0.00867973 trapezoidal_L2=0.00611842 events=4
+1: AMR descriptive fixture=0 theta=0.75 Einf=0.0100247 trapezoidal_L2=0.00709036 events=4
+1: AMR descriptive fixture=0 theta=1 Einf=0.0112693 trapezoidal_L2=0.00799092 events=4
+1: AMR descriptive fixture=0 theta=0.5 Einf=0.00867973 trapezoidal_L2=0.00611842 events=4
+1: AMR descriptive fixture=0 theta=0.75 Einf=0.0100247 trapezoidal_L2=0.00709036 events=4
+1: AMR descriptive fixture=0 theta=1 Einf=0.0112693 trapezoidal_L2=0.00799092 events=4
+1: [       OK ] C2C_AMR.ExistingAnalyticFixturesAgainstIndependentMeshAndStepOracle (15 ms)
+1: [ RUN      ] C2C_AMR.StrictIndicatorComparisonsAndAllOrNothingCapacity
+1: [       OK ] C2C_AMR.StrictIndicatorComparisonsAndAllOrNothingCapacity (0 ms)
+1: [----------] 4 tests from C2C_AMR (19 ms total)
+1: 
+1: [----------] 5 tests from C2C_AMRArithmetic
+1: [ RUN      ] C2C_AMRArithmetic.IndicatorFailuresPrecedeCaps
+1: [       OK ] C2C_AMRArithmetic.IndicatorFailuresPrecedeCaps (0 ms)
+1: [ RUN      ] C2C_AMRArithmetic.RecomputedIndicatorFailureAndBlockedSampling
+1: [       OK ] C2C_AMRArithmetic.RecomputedIndicatorFailureAndBlockedSampling (0 ms)
+1: [ RUN      ] C2C_AMRArithmetic.MidpointPreflightBeforeNodeCapacity
+1: [       OK ] C2C_AMRArithmetic.MidpointPreflightBeforeNodeCapacity (0 ms)
+1: [ RUN      ] C2C_AMRArithmetic.TimeScaledStencilAndFiniteUnderflow
+1: [       OK ] C2C_AMRArithmetic.TimeScaledStencilAndFiniteUnderflow (0 ms)
+1: [ RUN      ] C2C_AMRArithmetic.IndependentTransferScheduleEdgeOracles
+1: [       OK ] C2C_AMRArithmetic.IndependentTransferScheduleEdgeOracles (0 ms)
+1: [----------] 5 tests from C2C_AMRArithmetic (0 ms total)
+1: 
+1: [----------] 5 tests from C2C_Callbacks
+1: [ RUN      ] C2C_Callbacks.ValidationPrecedesAllSamples
+1: [       OK ] C2C_Callbacks.ValidationPrecedesAllSamples (0 ms)
+1: [ RUN      ] C2C_Callbacks.EachNonfiniteRoleAndUserException
+1: [       OK ] C2C_Callbacks.EachNonfiniteRoleAndUserException (0 ms)
+1: [ RUN      ] C2C_Callbacks.ExactRequiredSampleSetsAndUnusedArguments
+1: [       OK ] C2C_Callbacks.ExactRequiredSampleSetsAndUnusedArguments (0 ms)
+1: [ RUN      ] C2C_Callbacks.GeneratedPDERowFailuresAndRecovery
+1: [       OK ] C2C_Callbacks.GeneratedPDERowFailuresAndRecovery (0 ms)
+1: [ RUN      ] C2C_Callbacks.AdaptiveSharesCallbackAndBoundaryFailureRules
+1: [       OK ] C2C_Callbacks.AdaptiveSharesCallbackAndBoundaryFailureRules (0 ms)
+1: [----------] 5 tests from C2C_Callbacks (1 ms total)
+1: 
+1: [----------] 4 tests from C2C_Helpers
+1: [ RUN      ] C2C_Helpers.ArrayAllFormsOwnershipAndBounds
+1: [       OK ] C2C_Helpers.ArrayAllFormsOwnershipAndBounds (0 ms)
+1: [ RUN      ] C2C_Helpers.GridCopiesIndicesAndCoordinates
+1: [       OK ] C2C_Helpers.GridCopiesIndicesAndCoordinates (0 ms)
+1: [ RUN      ] C2C_Helpers.InvalidDomainsAndGrids
+1: [       OK ] C2C_Helpers.InvalidDomainsAndGrids (0 ms)
+1: [ RUN      ] C2C_Helpers.DefaultsReferencesFactoryAndTheta
+1: [       OK ] C2C_Helpers.DefaultsReferencesFactoryAndTheta (0 ms)
+1: [----------] 4 tests from C2C_Helpers (0 ms total)
+1: 
+1: [----------] 1 test from C2C_Integration
+1: [ RUN      ] C2C_Integration.UmbrellaAcrossMultipleTranslationUnits
+1: [       OK ] C2C_Integration.UmbrellaAcrossMultipleTranslationUnits (0 ms)
+1: [----------] 1 test from C2C_Integration (0 ms total)
+1: 
+1: [----------] 4 tests from C2C_Section7
+1: [ RUN      ] C2C_Section7.AllNumericalLadders
+1: C2C fixture=spatial-all-terms domain=[0,1]x[0,0.10000000000000001] nx=21 nt=4096 theta=0.5 Einf=0.0013799853131848394 E2=0.0009727582693074161 compiler=13.3.0 build=Release/NDEBUG source_revision=pending-local-implementation
+1: C2C fixture=spatial-all-terms domain=[0,1]x[0,0.10000000000000001] nx=41 nt=4096 theta=0.5 Einf=0.00034547449796651364 E2=0.00024315913916704682 compiler=13.3.0 build=Release/NDEBUG source_revision=pending-local-implementation
+1: C2C fixture=spatial-all-terms domain=[0,1]x[0,0.10000000000000001] nx=81 nt=4096 theta=0.5 Einf=8.636883647028526e-05 E2=6.0787891068603946e-05 compiler=13.3.0 build=Release/NDEBUG source_revision=pending-local-implementation
+1: spatial-all-terms adjacent=0 rate_inf=1.9980017892252804 rate_l2=2.0001805229652239
+1: spatial-all-terms adjacent=1 rate_inf=1.9999964591287227 rate_l2=2.0000449435307823
+1: C2C fixture=temporal-CN domain=[0,1]x[0,0.20000000000000001] nx=41 nt=20 theta=0.5 Einf=1.0322351844394007e-06 E2=7.5754378418484743e-07 compiler=13.3.0 build=Release/NDEBUG source_revision=pending-local-implementation
+1: C2C fixture=temporal-CN domain=[0,1]x[0,0.20000000000000001] nx=41 nt=40 theta=0.5 Einf=2.5801381697831971e-07 E2=1.8935410903018652e-07 compiler=13.3.0 build=Release/NDEBUG source_revision=pending-local-implementation
+1: C2C fixture=temporal-CN domain=[0,1]x[0,0.20000000000000001] nx=41 nt=80 theta=0.5 Einf=6.4500643937037694e-08 E2=4.7336538363465987e-08 compiler=13.3.0 build=Release/NDEBUG source_revision=pending-local-implementation
+1: temporal-CN adjacent=0 rate_inf=2.0002514807742986 rate_l2=2.000242546858348
+1: temporal-CN adjacent=1 rate_inf=2.0000628571775989 rate_l2=2.0000606150649824
+1: C2C fixture=temporal-theta075 domain=[0,1]x[0,0.20000000000000001] nx=41 nt=10 theta=0.75 Einf=0.00012667045989062098 E2=9.0001921959286199e-05 compiler=13.3.0 build=Release/NDEBUG source_revision=pending-local-implementation
+1: C2C fixture=temporal-theta075 domain=[0,1]x[0,0.20000000000000001] nx=41 nt=20 theta=0.75 Einf=6.3633555191622282e-05 E2=4.5211726119251008e-05 compiler=13.3.0 build=Release/NDEBUG source_revision=pending-local-implementation
+1: C2C fixture=temporal-theta075 domain=[0,1]x[0,0.20000000000000001] nx=41 nt=40 theta=0.75 Einf=3.1895673495263566e-05 E2=2.266160434566197e-05 compiler=13.3.0 build=Release/NDEBUG source_revision=pending-local-implementation
+1: temporal-theta075 adjacent=0 rate_inf=0.99322048887886716 rate_l2=0.99325881126644366
+1: temporal-theta075 adjacent=1 rate_inf=0.99642698470655089 rate_l2=0.99644699727232078
+1: C2C fixture=temporal-theta1 domain=[0,1]x[0,0.20000000000000001] nx=41 nt=10 theta=1 Einf=0.00024818346422128545 E2=0.00017634989253738662 compiler=13.3.0 build=Release/NDEBUG source_revision=pending-local-implementation
+1: C2C fixture=temporal-theta1 domain=[0,1]x[0,0.20000000000000001] nx=41 nt=20 theta=1 Einf=0.00012596887967308845 E2=8.9503692596032175e-05 compiler=13.3.0 build=Release/NDEBUG source_revision=pending-local-implementation
+1: C2C fixture=temporal-theta1 domain=[0,1]x[0,0.20000000000000001] nx=41 nt=40 theta=1 Einf=6.3465710148813415e-05 E2=4.5092504910590159e-05 compiler=13.3.0 build=Release/NDEBUG source_revision=pending-local-implementation
+1: temporal-theta1 adjacent=0 rate_inf=0.97833963268892998 rate_l2=0.97842158757228881
+1: temporal-theta1 adjacent=1 rate_inf=0.98901812855820459 rate_l2=0.989059549329104
+1: [       OK ] C2C_Section7.AllNumericalLadders (3524 ms)
+1: [ RUN      ] C2C_Section7.FixedHeatBenchmark
+1: C2C fixture=fixed-heat domain=[0,1]x[0,0.10000000000000001] nx=101 nt=1000 theta=0.5 Einf=3.0224654255506245e-05 E2=2.1372057982946408e-05 compiler=13.3.0 build=Release/NDEBUG source_revision=pending-local-implementation
+1: [       OK ] C2C_Section7.FixedHeatBenchmark (533 ms)
+1: [ RUN      ] C2C_Section7.OneRowCornerPrecedenceAndWeights
+1: [       OK ] C2C_Section7.OneRowCornerPrecedenceAndWeights (0 ms)
+1: [ RUN      ] C2C_Section7.HeatModeAmplification
+1: [       OK ] C2C_Section7.HeatModeAmplification (0 ms)
+1: [----------] 4 tests from C2C_Section7 (4058 ms total)
+1: 
+1: [----------] 4 tests from C2C_Thomas
+1: [ RUN      ] C2C_Thomas.SuccessAndUniformScaling
+1: [       OK ] C2C_Thomas.SuccessAndUniformScaling (0 ms)
+1: [ RUN      ] C2C_Thomas.ShapeAliasAndNonfiniteFailures
+1: [       OK ] C2C_Thomas.ShapeAliasAndNonfiniteFailures (0 ms)
+1: [ RUN      ] C2C_Thomas.NoPivotingAndGeneratedFailures
+1: [       OK ] C2C_Thomas.NoPivotingAndGeneratedFailures (0 ms)
+1: [ RUN      ] C2C_Thomas.OriginalRowPivotThresholdAndEquality
+1: [       OK ] C2C_Thomas.OriginalRowPivotThresholdAndEquality (0 ms)
+1: [----------] 4 tests from C2C_Thomas (0 ms total)
+1: 
+1: [----------] 2 tests from HelloTest
+1: [ RUN      ] HelloTest.ReturnsCorrectString
+1: [       OK ] HelloTest.ReturnsCorrectString (0 ms)
+1: [ RUN      ] HelloTest.NotEmpty
+1: [       OK ] HelloTest.NotEmpty (0 ms)
+1: [----------] 2 tests from HelloTest (0 ms total)
+1: 
+1: [----------] 3 tests from Implementation
+1: [ RUN      ] Implementation.ArbitraryDepthSiblingIdentity
+1: [       OK ] Implementation.ArbitraryDepthSiblingIdentity (0 ms)
+1: [ RUN      ] Implementation.IndicatorStrictZeroAndSubnormalRetention
+1: [       OK ] Implementation.IndicatorStrictZeroAndSubnormalRetention (0 ms)
+1: [ RUN      ] Implementation.ThomasLaterOverflowKeepsAllRHSValues
+1: [       OK ] Implementation.ThomasLaterOverflowKeepsAllRHSValues (0 ms)
+1: [----------] 3 tests from Implementation (0 ms total)
+1: 
+1: [----------] Global test environment tear-down
+1: [==========] 32 tests from 9 test suites ran. (4080 ms total)
+1: [  PASSED  ] 32 tests.
+1/1 Test #1: pde_solver_amr_core_test .........   Passed    4.08 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   4.08 sec
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/poetry run pytest tests/python
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-7.4.4, pluggy-1.7.0
+rootdir: /workspace/scratch/3d04287114f0/target
+collected 3 items
+
+tests/python/test_hello.py ...                                           [100%]
+
+============================== 3 passed in 0.01s ===============================
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/python -I -m build --no-isolation /workspace/scratch/3d04287114f0/target
+* Getting build dependencies for sdist...
+* Building sdist...
+* Building wheel from sdist
+* Getting build dependencies for wheel...
+* Building wheel...
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/cmake --preset linux-vcpkg-release -DPython_EXECUTABLE:FILEPATH=/workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/python -DCMAKE_MAKE_PROGRAM:FILEPATH=/workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/ninja -DVCPKG_OVERLAY_TRIPLETS:STRING=/workspace/scratch/3d04287114f0/target/.dev-tools/triplets
+Preset CMake variables:
+
+  BUILD_TESTING:BOOL="TRUE"
+  CMAKE_BUILD_TYPE="Release"
+  CMAKE_TOOLCHAIN_FILE="/workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
+
+-- Running vcpkg install
+Fetching registry information from https://github.com/microsoft/vcpkg (HEAD)...
+Detecting compiler hash for triplet x64-linux...
+Compiler found: /usr/bin/c++
+The following packages will be built and installed:
+    gtest:x64-linux@1.17.0#3 -- /tmp/build-via-sdist-__oyjs0r/pde_solver_amr-0.1.0/vcpkg-ports/gtest
+  * vcpkg-cmake:x64-linux@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+  * vcpkg-cmake-config:x64-linux@2024-05-23 -- git+https://github.com/microsoft/vcpkg@97a63e4bc1a17422ffe4eff71da53b4b561a7841
+Additional packages (*) will be modified to complete this operation.
+Restored 3 package(s) from /root/.cache/vcpkg/archives in 67.9 ms. Use --debug to see more details.
+Installing 1/3 vcpkg-cmake-config:x64-linux@2024-05-23...
+Elapsed time to handle vcpkg-cmake-config:x64-linux: 286 us
+vcpkg-cmake-config:x64-linux package ABI: 24ce4bb6c4125348082c8c9fe375593f9a9f7254f9b12d5c680cb71f4de193bf
+Installing 2/3 vcpkg-cmake:x64-linux@2024-04-23...
+Elapsed time to handle vcpkg-cmake:x64-linux: 246 us
+vcpkg-cmake:x64-linux package ABI: 4dc367d184659b3fe878cb2c82ae9c15fa3b21fb25f507127544ec77a3e22517
+Installing 3/3 gtest:x64-linux@1.17.0#3...
+Elapsed time to handle gtest:x64-linux: 1.76 ms
+gtest:x64-linux package ABI: 134393ec3fffe6e7abbc117ac80f9c86db47e6f09600cc2f8fe719468cd1efdd
+Installed contents are licensed to you by owners. Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Packages installed in this vcpkg installation declare the following licenses:
+BSD-3-Clause
+MIT
+The package gtest is compatible with built-in CMake targets:
+
+    enable_testing()
+
+    find_package(GTest CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+
+    add_test(AllTestsInMain main)
+
+All requested installations completed successfully in: 2.65 ms
+-- Running vcpkg install - done
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- pybind11 v3.0.1 
+-- Found Python: /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/python (found suitable version "3.12.14", minimum required is "3.8") found components: Interpreter Development.Module missing components: Development.Embed
+Using compatibility mode for Python, set PYBIND11_FINDPYTHON to NEW/OLD to silence this message
+-- Performing Test HAS_FLTO_AUTO
+-- Performing Test HAS_FLTO_AUTO - Success
+-- The C compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (15.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/build-via-sdist-__oyjs0r/pde_solver_amr-0.1.0/build/linux-vcpkg-release
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/cmake --build --preset linux-release
+[0/2] Re-checking globbed directories...
+[1/17] Building CXX object cpp/CMakeFiles/pde_solver_amr_core_static.dir/src/hello.cpp.o
+[2/17] Linking CXX static library cpp/libpde_solver_amr_core_static.a
+[3/17] Building CXX object cpp/CMakeFiles/pde_solver_amr_core.dir/bindings/hello_bindings.cpp.o
+[4/17] Building CXX object examples/cpp/CMakeFiles/demo.dir/demo.cpp.o
+[5/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/c2c_callbacks_acceptance.cpp.o
+[6/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/c2c_amr_acceptance.cpp.o
+[7/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/c2c_helpers_acceptance.cpp.o
+[8/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/c2c_multitu_acceptance.cpp.o
+[9/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/c2c_multitu_peer.cpp.o
+[10/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/c2c_numerical_acceptance.cpp.o
+[11/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/c2c_thomas_acceptance.cpp.o
+[12/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/hello_test.cpp.o
+[13/17] Linking CXX shared module /tmp/build-via-sdist-__oyjs0r/pde_solver_amr-0.1.0/src/pde_solver_amr/pde_solver_amr_core.cpython-312-x86_64-linux-gnu.so
+[14/17] Linking CXX executable examples/cpp/demo
+[15/17] Building CXX object tests/cpp/CMakeFiles/pde_solver_amr_core_test.dir/implementation_test.cpp.o
+[16/17] Linking CXX executable tests/cpp/pde_solver_amr_core_test
+Successfully built pde_solver_amr-0.1.0.tar.gz and pde_solver_amr-0.1.0-cp312-cp312-linux_x86_64.whl
++ /tmp/wheel-install-g5zysmqx/venv/bin/python -m pip install --no-deps /workspace/scratch/3d04287114f0/target/dist/pde_solver_amr-0.1.0-cp312-cp312-linux_x86_64.whl
+Processing /workspace/scratch/3d04287114f0/target/dist/pde_solver_amr-0.1.0-cp312-cp312-linux_x86_64.whl
+Installing collected packages: pde-solver-amr
+Successfully installed pde-solver-amr-0.1.0
++ /tmp/wheel-install-g5zysmqx/venv/bin/python -I -c "import pde_solver_amr as package; assert package.hello() == 'Hello, World!'; print(package.__file__)"
+/tmp/wheel-install-g5zysmqx/venv/lib/python3.12/site-packages/pde_solver_amr/__init__.py
++ /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/vcpkg install --x-manifest-root=/tmp/vcpkg-consumer-t_docuwr/static --x-install-root=/tmp/vcpkg-consumer-t_docuwr/static/vcpkg_installed --overlay-ports=/workspace/scratch/3d04287114f0/target/vcpkg-ports --overlay-triplets=/tmp/vcpkg-consumer-t_docuwr/triplets --triplet=x64-packaging-static --x-buildtrees-root=/tmp/vcpkg-consumer-t_docuwr/static/buildtrees --x-packages-root=/tmp/vcpkg-consumer-t_docuwr/static/packages --binarysource=clear
+Fetching registry information from https://github.com/microsoft/vcpkg (HEAD)...
+Detecting compiler hash for triplet x64-linux...
+Compiler found: /usr/bin/c++
+Detecting compiler hash for triplet x64-packaging-static...
+Compiler found: /usr/bin/c++
+The following packages will be built and installed:
+    pde-solver-amr-core:x64-packaging-static@0.1.0 -- /workspace/scratch/3d04287114f0/target/vcpkg-ports/pde-solver-amr-core
+  * vcpkg-cmake:x64-linux@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+  * vcpkg-cmake-config:x64-linux@2024-05-23 -- git+https://github.com/microsoft/vcpkg@97a63e4bc1a17422ffe4eff71da53b4b561a7841
+Additional packages (*) will be modified to complete this operation.
+Installing 1/3 vcpkg-cmake-config:x64-linux@2024-05-23...
+Building vcpkg-cmake-config:x64-linux@2024-05-23...
+/tmp/vcpkg-consumer-t_docuwr/triplets/x64-linux.cmake: info: loaded overlay triplet from here
+/root/.cache/vcpkg/registries/git-trees/97a63e4bc1a17422ffe4eff71da53b4b561a7841: info: installing from git registry git+https://github.com/microsoft/vcpkg@97a63e4bc1a17422ffe4eff71da53b4b561a7841
+-- Installing: /tmp/vcpkg-consumer-t_docuwr/static/packages/vcpkg-cmake-config_x64-linux/share/vcpkg-cmake-config/vcpkg_cmake_config_fixup.cmake
+-- Installing: /tmp/vcpkg-consumer-t_docuwr/static/packages/vcpkg-cmake-config_x64-linux/share/vcpkg-cmake-config/vcpkg-port-config.cmake
+-- Installing: /tmp/vcpkg-consumer-t_docuwr/static/packages/vcpkg-cmake-config_x64-linux/share/vcpkg-cmake-config/copyright
+-- Skipping post-build validation due to VCPKG_POLICY_EMPTY_PACKAGE
+Elapsed time to handle vcpkg-cmake-config:x64-linux: 111 ms
+vcpkg-cmake-config:x64-linux package ABI: 24ce4bb6c4125348082c8c9fe375593f9a9f7254f9b12d5c680cb71f4de193bf
+Installing 2/3 vcpkg-cmake:x64-linux@2024-04-23...
+Building vcpkg-cmake:x64-linux@2024-04-23...
+/tmp/vcpkg-consumer-t_docuwr/triplets/x64-linux.cmake: info: loaded overlay triplet from here
+/root/.cache/vcpkg/registries/git-trees/e74aa1e8f93278a8e71372f1fa08c3df420eb840: info: installing from git registry git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+-- Installing: /tmp/vcpkg-consumer-t_docuwr/static/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/vcpkg_cmake_configure.cmake
+-- Installing: /tmp/vcpkg-consumer-t_docuwr/static/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/vcpkg_cmake_build.cmake
+-- Installing: /tmp/vcpkg-consumer-t_docuwr/static/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/vcpkg_cmake_install.cmake
+-- Installing: /tmp/vcpkg-consumer-t_docuwr/static/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/vcpkg-port-config.cmake
+-- Installing: /tmp/vcpkg-consumer-t_docuwr/static/packages/vcpkg-cmake_x64-linux/share/vcpkg-cmake/copyright
+-- Performing post-build validation
+Elapsed time to handle vcpkg-cmake:x64-linux: 108 ms
+vcpkg-cmake:x64-linux package ABI: 4dc367d184659b3fe878cb2c82ae9c15fa3b21fb25f507127544ec77a3e22517
+Installing 3/3 pde-solver-amr-core:x64-packaging-static@0.1.0...
+Building pde-solver-amr-core:x64-packaging-static@0.1.0...
+/tmp/vcpkg-consumer-t_docuwr/triplets/x64-packaging-static.cmake: info: loaded overlay triplet from here
+/workspace/scratch/3d04287114f0/target/vcpkg-ports/pde-solver-amr-core: info: installing overlay port from here
+-- Configuring x64-packaging-static
+-- Building x64-packaging-static-dbg
+-- Building x64-packaging-static-rel
+-- Installing: /tmp/vcpkg-consumer-t_docuwr/static/packages/pde-solver-amr-core_x64-packaging-static/share/pde-solver-amr-core/copyright
+-- Performing post-build validation
+Elapsed time to handle pde-solver-amr-core:x64-packaging-static: 618 ms
+pde-solver-amr-core:x64-packaging-static package ABI: 9665add508c9fc8a89c2dbee4ad437d705948f6c3c3b54e274dabb75e3feca23
+Installed contents are licensed to you by owners. Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Packages installed in this vcpkg installation declare the following licenses:
+MIT
+pde-solver-amr-core provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(pde_solver_amr_core CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE pde_solver_amr_core::core)
+
+All requested installations completed successfully in: 837 ms
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/cmake -S /tmp/vcpkg-consumer-t_docuwr/static -B /tmp/vcpkg-consumer-t_docuwr/static/build-Release -G Ninja -DCMAKE_MAKE_PROGRAM:FILEPATH=/workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=/workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_INSTALLED_DIR=/tmp/vcpkg-consumer-t_docuwr/static/relocated-installed -DVCPKG_TARGET_TRIPLET=x64-packaging-static -DVCPKG_MANIFEST_INSTALL=OFF -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF -DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=OFF -DEXPECTED_PREFIX=/tmp/vcpkg-consumer-t_docuwr/static/relocated-installed/x64-packaging-static -DEXPECTED_LINKAGE=static
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Installed INTERFACE_INCLUDE_DIRECTORIES: /tmp/vcpkg-consumer-t_docuwr/static/relocated-installed/x64-packaging-static/include
+-- Installed IMPORTED_LOCATION_DEBUG: /tmp/vcpkg-consumer-t_docuwr/static/relocated-installed/x64-packaging-static/debug/lib/libpde_solver_amr_core_static.a
+-- Installed IMPORTED_LOCATION_RELEASE: /tmp/vcpkg-consumer-t_docuwr/static/relocated-installed/x64-packaging-static/lib/libpde_solver_amr_core_static.a
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/vcpkg-consumer-t_docuwr/static/build-Release
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/cmake --build /tmp/vcpkg-consumer-t_docuwr/static/build-Release --config Release
+[1/23] Building CXX object CMakeFiles/header_pde_solver_amr_core_Array_h.dir/header_pde_solver_amr_core_Array_h.cpp.o
+[2/23] Building CXX object CMakeFiles/header_pde_solver_amr_core_Checked_h.dir/header_pde_solver_amr_core_Checked_h.cpp.o
+[3/23] Building CXX object CMakeFiles/header_pde_solver_amr_core_Domain_h.dir/header_pde_solver_amr_core_Domain_h.cpp.o
+[4/23] Building CXX object CMakeFiles/header_pde_solver_amr_core_CrankNicholson1D_h.dir/header_pde_solver_amr_core_CrankNicholson1D_h.cpp.o
+[5/23] Building CXX object CMakeFiles/header_pde_solver_amr_core_Equation_h.dir/header_pde_solver_amr_core_Equation_h.cpp.o
+[6/23] Building CXX object CMakeFiles/header_pde_solver_amr_core_Grid_h.dir/header_pde_solver_amr_core_Grid_h.cpp.o
+[7/23] Building CXX object CMakeFiles/header_pde_solver_amr_core_PDE_h.dir/header_pde_solver_amr_core_PDE_h.cpp.o
+[8/23] Building CXX object CMakeFiles/header_pde_solver_amr_core_Tridiagonal_h.dir/header_pde_solver_amr_core_Tridiagonal_h.cpp.o
+[9/23] Building CXX object CMakeFiles/header_pde_solver_amr_core_hello_h.dir/header_pde_solver_amr_core_hello_h.cpp.o
+[10/23] Building CXX object CMakeFiles/header_pde_solver_amr_core_Types_h.dir/header_pde_solver_amr_core_Types_h.cpp.o
+[11/23] Building CXX object CMakeFiles/consumer.dir/main.cpp.o
+[12/23] Linking CXX executable header_pde_solver_amr_core_Array_h
+[13/23] Linking CXX executable header_pde_solver_amr_core_Checked_h
+[14/23] Linking CXX executable header_pde_solver_amr_core_CrankNicholson1D_h
+[15/23] Building CXX object CMakeFiles/consumer.dir/peer.cpp.o
+[16/23] Linking CXX executable header_pde_solver_amr_core_Domain_h
+[17/23] Linking CXX executable header_pde_solver_amr_core_Equation_h
+[18/23] Linking CXX executable header_pde_solver_amr_core_Grid_h
+[19/23] Linking CXX executable header_pde_solver_amr_core_PDE_h
+[20/23] Linking CXX executable header_pde_solver_amr_core_Tridiagonal_h
+[21/23] Linking CXX executable header_pde_solver_amr_core_Types_h
+[22/23] Linking CXX executable header_pde_solver_amr_core_hello_h
+[23/23] Linking CXX executable consumer
++ /workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/ctest --test-dir /tmp/vcpkg-consumer-t_docuwr/static/build-Release -C Release --no-tests=error --verbose
+Internal ctest changing into directory: /tmp/vcpkg-consumer-t_docuwr/static/build-Release
+UpdateCTestConfiguration  from :/tmp/vcpkg-consumer-t_docuwr/static/build-Release/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/tmp/vcpkg-consumer-t_docuwr/static/build-Release/DartConfiguration.tcl
+Test project /tmp/vcpkg-consumer-t_docuwr/static/build-Release
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: consumer
+
+1: Test command: /tmp/vcpkg-consumer-t_docuwr/static/build-Release/consumer
+1: Working Directory: /tmp/vcpkg-consumer-t_docuwr/static/build-Release
+1: Test timeout computed to be: 10000000
+1: Hello, World! heat error=3.02247e-05 adaptive nodes=101
+1/1 Test #1: consumer .........................***Failed    1.27 sec
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   1.27 sec
+
+The following tests FAILED:
+	  1 - consumer (Failed)
+Errors while running CTest
+Output from these tests are in: /tmp/vcpkg-consumer-t_docuwr/static/build-Release/Testing/Temporary/LastTest.log
+Use "--rerun-failed --output-on-failure" to re-run the failed cases verbosely.
+Traceback (most recent call last):
+  File "/workspace/scratch/3d04287114f0/target/scripts/validate.py", line 65, in <module>
+    main()
+  File "/workspace/scratch/3d04287114f0/target/scripts/validate.py", line 60, in main
+    validate_vcpkg(project, env)
+  File "/workspace/scratch/3d04287114f0/target/scripts/validate_vcpkg.py", line 85, in validate_vcpkg
+    run(["ctest", "--test-dir", build, "-C", configuration, "--no-tests=error", "--verbose"],
+  File "/workspace/scratch/3d04287114f0/target/scripts/bootstrap.py", line 23, in run
+    subprocess.run(command, cwd=cwd, env=env, check=True)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/workspace/scratch/3d04287114f0/target/.dev-tools/venv/bin/ctest', '--test-dir', '/tmp/vcpkg-consumer-t_docuwr/static/build-Release', '-C', 'Release', '--no-tests=error', '--verbose']' returned non-zero exit status 8.
+CANONICAL_EXIT_STATUS=1

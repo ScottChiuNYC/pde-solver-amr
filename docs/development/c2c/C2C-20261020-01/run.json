@@ -1,6 +1,6 @@
 {
   "run_id": "C2C-20261020-01",
-  "stage": "ACCEPTANCE_SEALED",
+  "stage": "IMPLEMENTING",
   "governing_skill_revision": "9d1845f509a88dc8aad2f825f41a7009c3e77d6c",
   "baseline_repo_SHA": "476b783142fbf15068f7fe3a677fb05b4498d0d3",
   "baseline_tree_SHA": "a25d1aca87d1a6d1051655554703a9d2cab0d2e7",
@@ -20,7 +20,8 @@
   },
   "roles": {
     "dispatcher": "/root",
-    "acceptance_analyst": "/root/acceptance"
+    "acceptance_analyst": "/root/acceptance",
+    "implementer": "/root/implementer"
   },
   "evidence": [
     {
@@ -31,6 +32,62 @@
       "location": "docs/development/c2c/C2C-20261020-01/baseline-validation.txt",
       "sha256": "cd3b372029274920c09f31171eff5aaf36c37fdd55726b034a7dd699d52ddf03",
       "limitations": "Linux GNU13.3 local; exact source tree independently materialized; local snapshot commit synthetic. Remote baseline Linux/Windows run 39476253576 separately verified."
+    },
+    {
+      "role": "implementer",
+      "candidate_SHA": "Pending mechanical publication; source bytes bound by implementation-source-sha256.txt and subsequent remote exact tree readback",
+      "location": "docs/development/c2c/C2C-20261020-01/implementation-artifact-inspection.txt",
+      "sha256": "eeca4d0a7f333f2915bbd79a6e301b46b55c763d1d9cd0352711bb4c43d419e8",
+      "exit_status": "See retained complete record",
+      "limitations": "Local prepublication evidence; final candidate CI/reviewer/verifier remain required"
+    },
+    {
+      "role": "implementer",
+      "candidate_SHA": "Pending mechanical publication; source bytes bound by implementation-source-sha256.txt and subsequent remote exact tree readback",
+      "location": "docs/development/c2c/C2C-20261020-01/implementation-focused.txt",
+      "sha256": "fa9315276d9121d3ea98dbd3b047801f43bf74b69ce3a00b88854968077203b1",
+      "exit_status": "See retained complete record",
+      "limitations": "Local prepublication evidence; final candidate CI/reviewer/verifier remain required"
+    },
+    {
+      "role": "implementer",
+      "candidate_SHA": "Pending mechanical publication; source bytes bound by implementation-source-sha256.txt and subsequent remote exact tree readback",
+      "location": "docs/development/c2c/C2C-20261020-01/implementation-inspection.md",
+      "sha256": "44f07b7a6ef2d1aa370025aedc3fafd7f13d5f5f5e5f18d8a4155ecaebaf151b",
+      "exit_status": "See retained complete record",
+      "limitations": "Local prepublication evidence; final candidate CI/reviewer/verifier remain required"
+    },
+    {
+      "role": "implementer",
+      "candidate_SHA": "Pending mechanical publication; source bytes bound by implementation-source-sha256.txt and subsequent remote exact tree readback",
+      "location": "docs/development/c2c/C2C-20261020-01/implementation-phases.txt",
+      "sha256": "b41268467b37018ca0030546fbc62303dae8edb9087d50497630c9a32ee843a5",
+      "exit_status": "See retained complete record",
+      "limitations": "Local prepublication evidence; final candidate CI/reviewer/verifier remain required"
+    },
+    {
+      "role": "implementer",
+      "candidate_SHA": "Pending mechanical publication; source bytes bound by implementation-source-sha256.txt and subsequent remote exact tree readback",
+      "location": "docs/development/c2c/C2C-20261020-01/implementation-source-sha256.txt",
+      "sha256": "28bbdec8f1782edeb778f06446bee476f358f66cbd953d7681c5743d1812a4c5",
+      "exit_status": "See retained complete record",
+      "limitations": "Local prepublication evidence; final candidate CI/reviewer/verifier remain required"
+    },
+    {
+      "role": "implementer",
+      "candidate_SHA": "Pending mechanical publication; source bytes bound by implementation-source-sha256.txt and subsequent remote exact tree readback",
+      "location": "docs/development/c2c/C2C-20261020-01/implementation-validation-initial.txt",
+      "sha256": "f3fff017a43346455bc196e759d23b9639a63464d51f08af13a66992c57e3bd6",
+      "exit_status": "See retained complete record",
+      "limitations": "Local prepublication evidence; final candidate CI/reviewer/verifier remain required"
+    },
+    {
+      "role": "implementer",
+      "candidate_SHA": "Pending mechanical publication; source bytes bound by implementation-source-sha256.txt and subsequent remote exact tree readback",
+      "location": "docs/development/c2c/C2C-20261020-01/implementation-validation.txt",
+      "sha256": "f73c8f48ceab680c8b75fbda68944c92c0195b00d3507f1ca070aec2a02a9311",
+      "exit_status": 0,
+      "limitations": "Local prepublication evidence; final candidate CI/reviewer/verifier remain required"
     }
   ],
   "acceptance_seal": {
@@ -51,8 +108,13 @@
       "tests/cpp/c2c_precode_validation.txt": "b71d232f105dedf58ebcb8561a832488c825e9fbc4ffad7a99d34018f17bf5ed",
       "tests/cpp/c2c_thomas_acceptance.cpp": "3a3d48f2f7927484853852ce960660b26fc1c7d5c159f6c18cb54b726a6a8b82"
     },
-    "dispatcher_check": "Read complete manifest, confirmed authority references, criteria and explicit source/artifact obligations; no implementation started. Durable exact readback required before delegation."
+    "dispatcher_check": "Read complete manifest, confirmed authority references, criteria and explicit source/artifact obligations; no implementation started. Durable exact readback required before delegation.",
+    "remote_commit": "d59a897badba8c1ebed95758c3f7c597886f46bd",
+    "remote_tree": "8f0ad4cfc82cd891643e89bbad9b2e3c06ab9834",
+    "readback": "All 14 complete files fetched by exact commit and byte-equal before Implementer launch"
   },
   "findings": [],
-  "owner_decisions": []
+  "owner_decisions": [],
+  "canonical_state_location": "GitHub issue #26 is the authoritative append-only stage/candidate/findings/verification/merge journal after this publication snapshot.",
+  "implementation_handoff": "Complete local implementation and canonical validation PASS. No Implementer edits after handoff. Exact candidate and remote readback recorded in issue #26."
 }

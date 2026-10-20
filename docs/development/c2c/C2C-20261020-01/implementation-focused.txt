@@ -1,0 +1,131 @@
+Tue Oct 20 19:30:22 UTC 2026
+Full standalone acceptance compile/run after AMR implementation
+Running main() from /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/buildtrees/gtest/src/v1.17.0-08a64ef364.clean/googletest/src/gtest_main.cc
+[==========] Running 27 tests from 7 test suites.
+[----------] Global test environment set-up.
+[----------] 4 tests from C2C_Helpers
+[ RUN      ] C2C_Helpers.ArrayAllFormsOwnershipAndBounds
+[       OK ] C2C_Helpers.ArrayAllFormsOwnershipAndBounds (0 ms)
+[ RUN      ] C2C_Helpers.GridCopiesIndicesAndCoordinates
+[       OK ] C2C_Helpers.GridCopiesIndicesAndCoordinates (0 ms)
+[ RUN      ] C2C_Helpers.InvalidDomainsAndGrids
+[       OK ] C2C_Helpers.InvalidDomainsAndGrids (0 ms)
+[ RUN      ] C2C_Helpers.DefaultsReferencesFactoryAndTheta
+[       OK ] C2C_Helpers.DefaultsReferencesFactoryAndTheta (0 ms)
+[----------] 4 tests from C2C_Helpers (0 ms total)
+
+[----------] 5 tests from C2C_Callbacks
+[ RUN      ] C2C_Callbacks.ValidationPrecedesAllSamples
+[       OK ] C2C_Callbacks.ValidationPrecedesAllSamples (0 ms)
+[ RUN      ] C2C_Callbacks.EachNonfiniteRoleAndUserException
+[       OK ] C2C_Callbacks.EachNonfiniteRoleAndUserException (0 ms)
+[ RUN      ] C2C_Callbacks.ExactRequiredSampleSetsAndUnusedArguments
+[       OK ] C2C_Callbacks.ExactRequiredSampleSetsAndUnusedArguments (0 ms)
+[ RUN      ] C2C_Callbacks.GeneratedPDERowFailuresAndRecovery
+[       OK ] C2C_Callbacks.GeneratedPDERowFailuresAndRecovery (0 ms)
+[ RUN      ] C2C_Callbacks.AdaptiveSharesCallbackAndBoundaryFailureRules
+[       OK ] C2C_Callbacks.AdaptiveSharesCallbackAndBoundaryFailureRules (0 ms)
+[----------] 5 tests from C2C_Callbacks (1 ms total)
+
+[----------] 4 tests from C2C_Section7
+[ RUN      ] C2C_Section7.AllNumericalLadders
+C2C fixture=spatial-all-terms domain=[0,1]x[0,0.10000000000000001] nx=21 nt=4096 theta=0.5 Einf=0.0013799853131848394 E2=0.0009727582693074161 compiler=13.3.0 build=Debug/assertions source_revision=pending-local-implementation
+C2C fixture=spatial-all-terms domain=[0,1]x[0,0.10000000000000001] nx=41 nt=4096 theta=0.5 Einf=0.00034547449796651364 E2=0.00024315913916704682 compiler=13.3.0 build=Debug/assertions source_revision=pending-local-implementation
+C2C fixture=spatial-all-terms domain=[0,1]x[0,0.10000000000000001] nx=81 nt=4096 theta=0.5 Einf=8.636883647028526e-05 E2=6.0787891068603946e-05 compiler=13.3.0 build=Debug/assertions source_revision=pending-local-implementation
+spatial-all-terms adjacent=0 rate_inf=1.9980017892252804 rate_l2=2.0001805229652239
+spatial-all-terms adjacent=1 rate_inf=1.9999964591287227 rate_l2=2.0000449435307823
+C2C fixture=temporal-CN domain=[0,1]x[0,0.20000000000000001] nx=41 nt=20 theta=0.5 Einf=1.0322351844394007e-06 E2=7.5754378418484743e-07 compiler=13.3.0 build=Debug/assertions source_revision=pending-local-implementation
+C2C fixture=temporal-CN domain=[0,1]x[0,0.20000000000000001] nx=41 nt=40 theta=0.5 Einf=2.5801381697831971e-07 E2=1.8935410903018652e-07 compiler=13.3.0 build=Debug/assertions source_revision=pending-local-implementation
+C2C fixture=temporal-CN domain=[0,1]x[0,0.20000000000000001] nx=41 nt=80 theta=0.5 Einf=6.4500643937037694e-08 E2=4.7336538363465987e-08 compiler=13.3.0 build=Debug/assertions source_revision=pending-local-implementation
+temporal-CN adjacent=0 rate_inf=2.0002514807742986 rate_l2=2.000242546858348
+temporal-CN adjacent=1 rate_inf=2.0000628571775989 rate_l2=2.0000606150649824
+C2C fixture=temporal-theta075 domain=[0,1]x[0,0.20000000000000001] nx=41 nt=10 theta=0.75 Einf=0.00012667045989062098 E2=9.0001921959286199e-05 compiler=13.3.0 build=Debug/assertions source_revision=pending-local-implementation
+C2C fixture=temporal-theta075 domain=[0,1]x[0,0.20000000000000001] nx=41 nt=20 theta=0.75 Einf=6.3633555191622282e-05 E2=4.5211726119251008e-05 compiler=13.3.0 build=Debug/assertions source_revision=pending-local-implementation
+C2C fixture=temporal-theta075 domain=[0,1]x[0,0.20000000000000001] nx=41 nt=40 theta=0.75 Einf=3.1895673495263566e-05 E2=2.266160434566197e-05 compiler=13.3.0 build=Debug/assertions source_revision=pending-local-implementation
+temporal-theta075 adjacent=0 rate_inf=0.99322048887886716 rate_l2=0.99325881126644366
+temporal-theta075 adjacent=1 rate_inf=0.99642698470655089 rate_l2=0.99644699727232078
+C2C fixture=temporal-theta1 domain=[0,1]x[0,0.20000000000000001] nx=41 nt=10 theta=1 Einf=0.00024818346422128545 E2=0.00017634989253738662 compiler=13.3.0 build=Debug/assertions source_revision=pending-local-implementation
+C2C fixture=temporal-theta1 domain=[0,1]x[0,0.20000000000000001] nx=41 nt=20 theta=1 Einf=0.00012596887967308845 E2=8.9503692596032175e-05 compiler=13.3.0 build=Debug/assertions source_revision=pending-local-implementation
+C2C fixture=temporal-theta1 domain=[0,1]x[0,0.20000000000000001] nx=41 nt=40 theta=1 Einf=6.3465710148813415e-05 E2=4.5092504910590159e-05 compiler=13.3.0 build=Debug/assertions source_revision=pending-local-implementation
+temporal-theta1 adjacent=0 rate_inf=0.97833963268892998 rate_l2=0.97842158757228881
+temporal-theta1 adjacent=1 rate_inf=0.98901812855820459 rate_l2=0.989059549329104
+[       OK ] C2C_Section7.AllNumericalLadders (2972 ms)
+[ RUN      ] C2C_Section7.FixedHeatBenchmark
+C2C fixture=fixed-heat domain=[0,1]x[0,0.10000000000000001] nx=101 nt=1000 theta=0.5 Einf=3.0224654255506245e-05 E2=2.1372057982946408e-05 compiler=13.3.0 build=Debug/assertions source_revision=pending-local-implementation
+[       OK ] C2C_Section7.FixedHeatBenchmark (498 ms)
+[ RUN      ] C2C_Section7.OneRowCornerPrecedenceAndWeights
+[       OK ] C2C_Section7.OneRowCornerPrecedenceAndWeights (0 ms)
+[ RUN      ] C2C_Section7.HeatModeAmplification
+[       OK ] C2C_Section7.HeatModeAmplification (0 ms)
+[----------] 4 tests from C2C_Section7 (3471 ms total)
+
+[----------] 4 tests from C2C_Thomas
+[ RUN      ] C2C_Thomas.SuccessAndUniformScaling
+[       OK ] C2C_Thomas.SuccessAndUniformScaling (0 ms)
+[ RUN      ] C2C_Thomas.ShapeAliasAndNonfiniteFailures
+[       OK ] C2C_Thomas.ShapeAliasAndNonfiniteFailures (0 ms)
+[ RUN      ] C2C_Thomas.NoPivotingAndGeneratedFailures
+[       OK ] C2C_Thomas.NoPivotingAndGeneratedFailures (0 ms)
+[ RUN      ] C2C_Thomas.OriginalRowPivotThresholdAndEquality
+[       OK ] C2C_Thomas.OriginalRowPivotThresholdAndEquality (0 ms)
+[----------] 4 tests from C2C_Thomas (0 ms total)
+
+[----------] 4 tests from C2C_AMR
+[ RUN      ] C2C_AMR.UniformIdentityAndIgnoredAMR
+[       OK ] C2C_AMR.UniformIdentityAndIgnoredAMR (3 ms)
+[ RUN      ] C2C_AMR.OptionsBeforeCallbacks
+[       OK ] C2C_AMR.OptionsBeforeCallbacks (0 ms)
+[ RUN      ] C2C_AMR.ExistingAnalyticFixturesAgainstIndependentMeshAndStepOracle
+AMR descriptive fixture=0 theta=0.5 Einf=0.012597901211158558 trapezoidal_L2=0.0068478832526345365 events=8
+AMR descriptive fixture=0 theta=0.75 Einf=0.008819488576199852 trapezoidal_L2=0.006353208247488069 events=8
+AMR descriptive fixture=0 theta=1 Einf=0.0096682887503511949 trapezoidal_L2=0.0070665706798817719 events=8
+AMR descriptive fixture=1 theta=0.5 Einf=2.5813360897686266e-05 trapezoidal_L2=1.8973528898365259e-05 events=4
+AMR descriptive fixture=1 theta=0.75 Einf=0.0011288649732108524 trapezoidal_L2=0.00082859734880105014 events=4
+AMR descriptive fixture=1 theta=1 Einf=0.0021872430339735516 trapezoidal_L2=0.0016054057476872405 events=4
+AMR descriptive fixture=2 theta=0.5 Einf=5.3966025598262135e-06 trapezoidal_L2=3.8356905073691767e-06 events=4
+AMR descriptive fixture=2 theta=0.75 Einf=0.00031517754710153056 trapezoidal_L2=0.00022405357643469811 events=4
+AMR descriptive fixture=2 theta=1 Einf=0.00059856868201180191 trapezoidal_L2=0.00042557960131284797 events=4
+AMR descriptive fixture=3 theta=0.5 Einf=0.00063330633569917347 trapezoidal_L2=0.0004478062019964915 events=12
+AMR descriptive fixture=3 theta=0.75 Einf=0.0063028805626362417 trapezoidal_L2=0.0044568099800662902 events=12
+AMR descriptive fixture=3 theta=1 Einf=0.013530704366587765 trapezoidal_L2=0.0095678784829350428 events=12
+AMR descriptive fixture=3 theta=0.5 Einf=4.0597905349951113e-05 trapezoidal_L2=2.8707054174919574e-05 events=16
+AMR descriptive fixture=3 theta=0.75 Einf=0.0055489548279419824 trapezoidal_L2=0.0039237028134972542 events=16
+AMR descriptive fixture=3 theta=1 Einf=0.012625655231500964 trapezoidal_L2=0.0089279560936436041 events=16
+AMR descriptive fixture=0 theta=0.5 Einf=0.034747143393993873 trapezoidal_L2=0.024494703713002431 events=0
+AMR descriptive fixture=0 theta=0.75 Einf=0.035316528432339123 trapezoidal_L2=0.02491720650108117 events=0
+AMR descriptive fixture=0 theta=1 Einf=0.035833756560789798 trapezoidal_L2=0.025302833780728947 events=0
+AMR descriptive fixture=0 theta=0.5 Einf=0.034747143393993873 trapezoidal_L2=0.024494703713002431 events=0
+AMR descriptive fixture=0 theta=0.75 Einf=0.035316528432339123 trapezoidal_L2=0.02491720650108117 events=0
+AMR descriptive fixture=0 theta=1 Einf=0.035833756560789798 trapezoidal_L2=0.025302833780728947 events=0
+AMR descriptive fixture=0 theta=0.5 Einf=0.0086797289019013846 trapezoidal_L2=0.0061184242159736035 events=4
+AMR descriptive fixture=0 theta=0.75 Einf=0.010024715681932417 trapezoidal_L2=0.0070903610186058485 events=4
+AMR descriptive fixture=0 theta=1 Einf=0.011269319741270323 trapezoidal_L2=0.007990920477296954 events=4
+AMR descriptive fixture=0 theta=0.5 Einf=0.0086797289019013846 trapezoidal_L2=0.0061184242159736035 events=4
+AMR descriptive fixture=0 theta=0.75 Einf=0.010024715681932417 trapezoidal_L2=0.0070903610186058485 events=4
+AMR descriptive fixture=0 theta=1 Einf=0.011269319741270323 trapezoidal_L2=0.007990920477296954 events=4
+[       OK ] C2C_AMR.ExistingAnalyticFixturesAgainstIndependentMeshAndStepOracle (14 ms)
+[ RUN      ] C2C_AMR.StrictIndicatorComparisonsAndAllOrNothingCapacity
+[       OK ] C2C_AMR.StrictIndicatorComparisonsAndAllOrNothingCapacity (0 ms)
+[----------] 4 tests from C2C_AMR (17 ms total)
+
+[----------] 5 tests from C2C_AMRArithmetic
+[ RUN      ] C2C_AMRArithmetic.IndicatorFailuresPrecedeCaps
+[       OK ] C2C_AMRArithmetic.IndicatorFailuresPrecedeCaps (0 ms)
+[ RUN      ] C2C_AMRArithmetic.RecomputedIndicatorFailureAndBlockedSampling
+[       OK ] C2C_AMRArithmetic.RecomputedIndicatorFailureAndBlockedSampling (0 ms)
+[ RUN      ] C2C_AMRArithmetic.MidpointPreflightBeforeNodeCapacity
+[       OK ] C2C_AMRArithmetic.MidpointPreflightBeforeNodeCapacity (0 ms)
+[ RUN      ] C2C_AMRArithmetic.TimeScaledStencilAndFiniteUnderflow
+[       OK ] C2C_AMRArithmetic.TimeScaledStencilAndFiniteUnderflow (0 ms)
+[ RUN      ] C2C_AMRArithmetic.IndependentTransferScheduleEdgeOracles
+[       OK ] C2C_AMRArithmetic.IndependentTransferScheduleEdgeOracles (0 ms)
+[----------] 5 tests from C2C_AMRArithmetic (0 ms total)
+
+[----------] 1 test from C2C_Integration
+[ RUN      ] C2C_Integration.UmbrellaAcrossMultipleTranslationUnits
+[       OK ] C2C_Integration.UmbrellaAcrossMultipleTranslationUnits (0 ms)
+[----------] 1 test from C2C_Integration (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 27 tests from 7 test suites ran. (3490 ms total)
+[  PASSED  ] 27 tests.

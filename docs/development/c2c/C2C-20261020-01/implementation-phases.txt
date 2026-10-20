@@ -1,0 +1,90 @@
+Tue Oct 20 19:27:51 UTC 2026
+PHASE 1: public helper/invalid-grid gate before Thomas or PDE implementation
+g++ -std=c++17 -Icpp/include -fsyntax-only /tmp/c2c_section6.cpp
+g++ -std=c++17 helper-only extracted acceptance TU and gtest libraries
+/usr/bin/ld: cannot find .dev-tools/vcpkg/packages/gtest_x64-linux/lib/libgtest_main.a: No such file or directory
+collect2: error: ld returned 1 exit status
+Retry with installed gtest manual-link archive path
+Running main() from /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/buildtrees/gtest/src/v1.17.0-08a64ef364.clean/googletest/src/gtest_main.cc
+[==========] Running 3 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 3 tests from C2C_Helpers
+[ RUN      ] C2C_Helpers.ArrayAllFormsOwnershipAndBounds
+[       OK ] C2C_Helpers.ArrayAllFormsOwnershipAndBounds (0 ms)
+[ RUN      ] C2C_Helpers.GridCopiesIndicesAndCoordinates
+[       OK ] C2C_Helpers.GridCopiesIndicesAndCoordinates (0 ms)
+[ RUN      ] C2C_Helpers.InvalidDomainsAndGrids
+[       OK ] C2C_Helpers.InvalidDomainsAndGrids (0 ms)
+[----------] 3 tests from C2C_Helpers (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 3 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 3 tests.
+Tue Oct 20 19:28:19 UTC 2026
+PHASE 2: Thomas gate before PDE stepping
+g++ -std=c++17 c2c_thomas_acceptance.cpp + gtest; execute full C2C_Thomas suite
+Running main() from /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/buildtrees/gtest/src/v1.17.0-08a64ef364.clean/googletest/src/gtest_main.cc
+[==========] Running 4 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 4 tests from C2C_Thomas
+[ RUN      ] C2C_Thomas.SuccessAndUniformScaling
+[       OK ] C2C_Thomas.SuccessAndUniformScaling (0 ms)
+[ RUN      ] C2C_Thomas.ShapeAliasAndNonfiniteFailures
+[       OK ] C2C_Thomas.ShapeAliasAndNonfiniteFailures (0 ms)
+[ RUN      ] C2C_Thomas.NoPivotingAndGeneratedFailures
+[       OK ] C2C_Thomas.NoPivotingAndGeneratedFailures (0 ms)
+[ RUN      ] C2C_Thomas.OriginalRowPivotThresholdAndEquality
+[       OK ] C2C_Thomas.OriginalRowPivotThresholdAndEquality (0 ms)
+[----------] 4 tests from C2C_Thomas (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 4 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 4 tests.
+Tue Oct 20 19:29:12 UTC 2026
+PHASE 3: uniform defaults/references/callback/one-row/heat gates
+/usr/bin/ld: /tmp/ccXSAirv.o: in function `(anonymous namespace)::C2C_Callbacks_AdaptiveSharesCallbackAndBoundaryFailureRules_Test::TestBody()':
+c2c_callbacks_acceptance.cpp:(.text+0x3230): undefined reference to `PDE::Scheme::CrankNicholson1D::solve(PDE::SolveOptions1D const&) const'
+/usr/bin/ld: c2c_callbacks_acceptance.cpp:(.text+0x33de): undefined reference to `PDE::Scheme::CrankNicholson1D::solve(PDE::SolveOptions1D const&) const'
+/usr/bin/ld: c2c_callbacks_acceptance.cpp:(.text+0x34df): undefined reference to `PDE::Scheme::CrankNicholson1D::solve(PDE::SolveOptions1D const&) const'
+/usr/bin/ld: /tmp/ccXSAirv.o: in function `(anonymous namespace)::C2C_Callbacks_AdaptiveSharesCallbackAndBoundaryFailureRules_Test::TestBody() [clone .cold]':
+c2c_callbacks_acceptance.cpp:(.text.unlikely+0x1e6c): undefined reference to `PDE::Scheme::CrankNicholson1D::solve(PDE::SolveOptions1D const&) const'
+/usr/bin/ld: c2c_callbacks_acceptance.cpp:(.text.unlikely+0x20ce): undefined reference to `PDE::Scheme::CrankNicholson1D::solve(PDE::SolveOptions1D const&) const'
+/usr/bin/ld: /tmp/ccXSAirv.o:c2c_callbacks_acceptance.cpp:(.text.unlikely+0x21d5): more undefined references to `PDE::Scheme::CrankNicholson1D::solve(PDE::SolveOptions1D const&) const' follow
+collect2: error: ld returned 1 exit status
+Retry with uniform-only extracted callback acceptance TU (Adaptive overload not yet implemented)
+Running main() from /workspace/scratch/3d04287114f0/target/.dev-tools/vcpkg/buildtrees/gtest/src/v1.17.0-08a64ef364.clean/googletest/src/gtest_main.cc
+Note: Google Test filter = C2C_Helpers.*:C2C_Callbacks.*:C2C_Section7.OneRowCornerPrecedenceAndWeights:C2C_Section7.HeatModeAmplification
+[==========] Running 10 tests from 3 test suites.
+[----------] Global test environment set-up.
+[----------] 4 tests from C2C_Helpers
+[ RUN      ] C2C_Helpers.ArrayAllFormsOwnershipAndBounds
+[       OK ] C2C_Helpers.ArrayAllFormsOwnershipAndBounds (0 ms)
+[ RUN      ] C2C_Helpers.GridCopiesIndicesAndCoordinates
+[       OK ] C2C_Helpers.GridCopiesIndicesAndCoordinates (0 ms)
+[ RUN      ] C2C_Helpers.InvalidDomainsAndGrids
+[       OK ] C2C_Helpers.InvalidDomainsAndGrids (0 ms)
+[ RUN      ] C2C_Helpers.DefaultsReferencesFactoryAndTheta
+[       OK ] C2C_Helpers.DefaultsReferencesFactoryAndTheta (0 ms)
+[----------] 4 tests from C2C_Helpers (0 ms total)
+
+[----------] 4 tests from C2C_Callbacks
+[ RUN      ] C2C_Callbacks.ValidationPrecedesAllSamples
+[       OK ] C2C_Callbacks.ValidationPrecedesAllSamples (0 ms)
+[ RUN      ] C2C_Callbacks.EachNonfiniteRoleAndUserException
+[       OK ] C2C_Callbacks.EachNonfiniteRoleAndUserException (0 ms)
+[ RUN      ] C2C_Callbacks.ExactRequiredSampleSetsAndUnusedArguments
+[       OK ] C2C_Callbacks.ExactRequiredSampleSetsAndUnusedArguments (0 ms)
+[ RUN      ] C2C_Callbacks.GeneratedPDERowFailuresAndRecovery
+[       OK ] C2C_Callbacks.GeneratedPDERowFailuresAndRecovery (0 ms)
+[----------] 4 tests from C2C_Callbacks (0 ms total)
+
+[----------] 2 tests from C2C_Section7
+[ RUN      ] C2C_Section7.OneRowCornerPrecedenceAndWeights
+[       OK ] C2C_Section7.OneRowCornerPrecedenceAndWeights (0 ms)
+[ RUN      ] C2C_Section7.HeatModeAmplification
+[       OK ] C2C_Section7.HeatModeAmplification (0 ms)
+[----------] 2 tests from C2C_Section7 (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 10 tests from 3 test suites ran. (1 ms total)
+[  PASSED  ] 10 tests.
