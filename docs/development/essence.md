@@ -424,7 +424,27 @@ Before the node-cap decision or any refinement mutation, inserted-value sampling
 
 After every proposed midpoint passes, let `m` be the current node count and `N` the proposed split count. Compare `N` with `max_nodes-m` without overflowing a node-count addition. If `N>max_nodes-m`, apply none of the refinement batch, insert no midpoint values and accept no refinement events, and set `refinement_limited=true`. Otherwise accept the entire batch, transfer/sample the inserted values as below, and record its refinement events from left to right. An empty batch has no refinement events. After either a successful refinement batch or a depth/node-cap limitation, recompute indicators on the resulting current state and then coarsen once all eligible disjoint sibling pairs whose two child-cell indicators are each **strictly below** `coarsen_tolerance`, excluding newly refined children. Record coarsening events from left to right after any refinement events at that opportunity. The solve then continues on that mesh to the next scheduled PDE step. A transfer, callback, arithmetic or other solve failure retains the existing no-partial-success rule. There is no repeated estimator-satisfaction loop, global transfer-budget ledger, adaptive-work target, or implicit numerical-accuracy promise.
 
-At initialization, use the original initial callback for any inserted initial midpoints, retaining old nodal values. At later refinement, insert a midpoint by **linear interpolation** from the two adjacent old values, retaining every old node/value. Coarsening removes only the shared child midpoint and retains every other node/value. Time, original endpoints and caller callbacks remain unchanged. All subsequent PDE callback sampling occurs on the current mesh under the original Section 4 theta semantics.
+At initialization, use the original initial callback for any inserted initial midpoints, retaining old nodal values. At later refinement, insert a midpoint by **linear interpolation** from the two adjacent old values, retaining every old node/value. For an accepted parent `[left,right]`, let `mid` and `width` be exactly the binary64 results retained from its midpoint preflight, and let `UL,UR` be the values at `left,right` in the old state before the simultaneous refinement batch. The mathematical interpolation is
+
+\[
+U(mid)=(1-\alpha)U_L+\alpha U_R,\qquad
+\alpha=\frac{mid-left}{right-left}.
+\]
+
+These are physical-coordinate weights at the prescribed rounded `mid`; that coordinate need not be the exact real midpoint, so do not replace the interpolation by an endpoint mean or assume `alpha=0.5`. The following evaluation is normative only for later-refinement transfer in Adaptive mode. In the displayed order compute:
+
+```text
+offset = mid - left
+alpha = offset / width
+beta = 1 - alpha
+pL = beta * UL
+pR = alpha * UR
+inserted = pL + pR
+```
+
+Each assignment is one separate binary64 operation under Section 3's arithmetic model, with an immediate finiteness check before its result is used. Retain finite underflow, including zero. Do not form a difference of endpoint values, form coordinate-weighted numerators, substitute a different algebraically equivalent expression, reassociate operations, contract them, or use wider intermediates to bypass a check. The real-arithmetic formula defines linear interpolation; the displayed checked schedule defines its floating-point evaluation. Any nonfinite prescribed intermediate throws `std::runtime_error` identifying later-refinement transfer and the parent interval, even if another evaluation could remain finite; there is no rescaling, retry or fallback. A failure returns no partial successful `Solution1D`, accepts no events from the failing refinement batch, and performs no coarsening at that opportunity or subsequent PDE step. Evaluate inserted values from left to right after the unchanged midpoint preflight and node-cap decision; a node-cap-blocked batch performs no transfer.
+
+Coarsening removes only the shared child midpoint and retains every other node/value. Time, original endpoints and caller callbacks remain unchanged. All subsequent PDE callback sampling occurs on the current mesh under the original Section 4 theta semantics.
 
 ### 8.5 Exactly the existing PDE acceptance scope
 
