@@ -12,7 +12,7 @@ Provide a header-only C++17 library for
 u_t=a(t,x)u_{xx}+b(t,x)u_x+c(t,x)u+f(t,x),\qquad x\in[x_L,x_R],\ t\in[t_0,t_1].
 \]
 
-The public name `CrankNicholson1D` denotes the theta family specified below: default Crank–Nicolson (`theta=0.5`), with every finite `theta` in `[0.5,1]` supported. Only one spatial dimension, forward time, and Dirichlet boundaries are supported. The original uniform-grid `solve()` path remains unchanged; Section 8 adds an opt-in dynamic spatial AMR path using the **same PDE, theta time scheme and Thomas solver**. Neumann and Gamma remain enum values for rejection. No Python solver API, public arbitrary-point interpolation, full trajectory output, alternate linear solver, or adaptive time stepping is supported.
+The public name `CrankNicholson1D` denotes the theta family specified below: default Crank–Nicolson (`theta=0.5`), with every finite `theta` in `[0.5,1]` supported. Only one spatial dimension, forward time, and Dirichlet boundaries are supported. The original uniform-grid `solve()` path remains unchanged; an additive `solve(SolveOptions1D)` overload selects Uniform or AMR using a common `Solution1D` result and the **same PDE, theta time scheme and Thomas solver**. Neumann and Gamma remain enum values for rejection. No Python solver API, public arbitrary-point interpolation, full trajectory output, alternate linear solver, or adaptive time stepping is supported.
 
 This file is the entire normative domain contract. `PROJECT_SKELETON_CONTRACT.md` (version 1.1, in the same directory) is the Project Boundary and governs repository locations, build targets, packaging, bindings, tests, examples, CI, and clean C++ consumers. That contract governs infrastructure; this file governs domain behavior. Neither overrides requirements owned by the other.
 
@@ -26,12 +26,13 @@ The umbrella exposes every declaration below. Individual headers must be self-co
 
 ## 2. Public C++ surface
 
-These are the original uniform-grid public declarations plus the small additive AMR types/method of Section 8. All previously existing signatures and their Sections 3–6 semantics remain unchanged. All names are in the namespaces shown. No exception specifications are required.
+These are the original uniform-grid public declarations plus the small additive mesh-mode options, common result and `solve(options)` overload described in Section 8. All previously existing signatures and their Sections 3–6 semantics remain unchanged. All names are in the namespaces shown. No exception specifications are required.
 
 ```cpp
 #include <array>
 #include <cstddef>
 #include <functional>
+#include <optional>
 #include <vector>
 
 namespace PDE {
@@ -112,17 +113,22 @@ struct AMROptions {
     double refine_tolerance;       // caller-selected mesh indicator, not a PDE error bound
     double coarsen_tolerance;      // caller-selected hysteresis indicator
 };
+enum class MeshMode { Uniform, Adaptive };
+struct SolveOptions1D {
+    MeshMode mesh_mode = MeshMode::Uniform;
+    std::optional<AMROptions> amr;  // required in Adaptive mode only
+};
 struct AMREvent {
     std::size_t step;              // 0 for initialization
     double time;
     AMRAction action;
     double left, right;            // pre-event parent interval
 };
-struct AMRResult {
-    std::vector<double> x;         // final ordered nodes with endpoints
-    Array1D values;                // owned values at those nodes
-    std::vector<AMREvent> events;  // committed mesh changes
-    bool refinement_limited = false;
+struct Solution1D {
+    std::vector<double> x;         // final ordered coordinates in either mode
+    Array1D values;                // owned final values at x
+    std::vector<AMREvent> events;  // empty for Uniform
+    bool refinement_limited = false; // false for Uniform
 };
 namespace Scheme {
 class CrankNicholson1D {
@@ -134,8 +140,8 @@ public:
     CrankNicholson1D& operator=(CrankNicholson1D&&) = delete;
     void setTheta(double theta);
     double theta() const;
-    Array1D solve() const;
-    AMRResult solveAdaptive(AMROptions const& options) const;
+    Array1D solve() const; // unchanged original uniform API
+    Solution1D solve(SolveOptions1D const& options) const; // common result in both modes
 private:
     Grid1D const& m_grid;
     PDE1D const& m_pde;
@@ -151,9 +157,9 @@ inline Scheme::CrankNicholson1D makeSolver1D(Grid1D const& grid,
 
 `Array1D` owns contiguous `double` storage in increasing index order. The default is empty; the size constructor creates exactly `size` elements initialized to `value`, including size zero. Nonfinite stored values are permitted in the general container. Copying is deep; moving transfers storage and leaves the source empty (self-move leaves the object unchanged). Copy assignment has the strong exception guarantee. `fill` changes all values without changing size. Both `operator[]` and `at` check `i<size()` and otherwise throw `std::runtime_error`. Iterators span `[begin(),end())`; `data()` points to the first element and is `nullptr` when empty. Caller iterator/pointer arithmetic must stay within the storage bounds. Assignment, move, and destruction may invalidate access to the affected storage; swap transfers storage ownership and existing element references follow that storage. Fill and element assignment do not invalidate access. There is no padded or external-storage view.
 
-The scheme and factory retain references, never copies of the grid or PDE. Both referenced objects and objects referenced by their callbacks must outlive every use of the scheme, including copied/moved schemes; do not pass temporary configurations. Scheme copying/moving preserves the references and theta. Construction/factory calls do not evaluate callbacks or validate the PDE's mutable fields. Changes to configurations between solves are observed by the next solve. Do not mutate them during a solve. `setTheta` accepts exactly finite `[0.5,1]`; invalid input throws `std::runtime_error` and leaves theta unchanged. `theta()` returns the current value. `solve()` has no persistent trajectory, factorization cache, or mutation of its configurations or theta; success returns an independent owning array of `nx` final-time values. Failure returns no partial array. `solveAdaptive()` has the same ownership/failure principle but additionally returns the final mesh and accepted adaptation events (Section 8). Concurrent solves require unchanged configurations and callbacks safe for concurrent use; concurrent setters are not supported.
+The scheme and factory retain references, never copies of the grid or PDE. Both referenced objects and objects referenced by their callbacks must outlive every use of the scheme, including copied/moved schemes; do not pass temporary configurations. Scheme copying/moving preserves the references and theta. Construction/factory calls do not evaluate callbacks or validate the PDE's mutable fields. Changes to configurations between solves are observed by the next solve. Do not mutate them during a solve. `setTheta` accepts exactly finite `[0.5,1]`; invalid input throws `std::runtime_error` and leaves theta unchanged. `theta()` returns the current value. `solve()` has no persistent trajectory, factorization cache, or mutation of its configurations or theta; success returns an independent owning array of `nx` final-time values. Failure returns no partial array. `solve(SolveOptions1D)` has the same ownership/failure principle, returning a `Solution1D` with final mesh and values in both modes, and accepted adaptation events only in Adaptive mode (Section 8). Concurrent solves require unchanged configurations and callbacks safe for concurrent use; concurrent setters are not supported.
 
-The original `Grid1D`, `PDE1D`, `Array1D`, factory and `TridiagonalSolver` API remain unchanged. For `solveAdaptive()`, `Grid1D` supplies the **initial uniform spatial grid** and the original immutable time grid. It is not mutated; no separate public arbitrary-grid constructor is required.
+The original `Grid1D`, `PDE1D`, `Array1D`, factory and `TridiagonalSolver` API remain unchanged. For Adaptive `solve(options)`, `Grid1D` supplies the **initial uniform spatial grid** and the original immutable time grid; for Uniform `solve(options)`, it remains the fixed spatial and temporal grid. It is not mutated; no separate public arbitrary-grid constructor is required.
 
 ## 3. Grid, data, and errors
 
@@ -314,15 +320,30 @@ Record grid/domain, theta, fixture identity, both errors and pairwise rates, com
 
 The fixed-grid `solve()` contract of Sections 2–7 is preserved **in full**. It remains callable by the same C++17 source, with the same `Grid1D`, `PDE1D`, `CrankNicholson1D`, `makeSolver1D`, theta range `[0.5,1]`, coefficient endpoint averaging, original sampling/Dirichlet semantics, Thomas solver, validation/failure behavior, and Section 7 numerical acceptance tests.
 
-`solveAdaptive(AMROptions)` is an **additive opt-in method** on the *same* scheme object. It uses the same fixed time grid and theta stepping; the only differences are evolving nonuniform spatial nodes, the resulting three-point spatial weights, refinement/coarsening, necessary nodal transfer, and the final mesh/event output. No Rannacher startup, adaptive time stepping, different linear solver, alternative PDE family, public spatial evaluator, global numerical-error certificate, or efficiency guarantee is added. Preserve the current Project Skeleton Contract.
+`solve(SolveOptions1D)` is an **additive overload** on the same scheme object that selects `MeshMode::Uniform` or `MeshMode::Adaptive` and always returns `Solution1D`. Uniform mode must reproduce the original `solve()` values on the original grid; Adaptive mode uses the same fixed time grid and theta stepping, with only evolving nonuniform spatial nodes, the resulting three-point spatial weights, refinement/coarsening, necessary nodal transfer, and final mesh/event output differing. No Rannacher startup, adaptive time stepping, different linear solver, alternative PDE family, public spatial evaluator, global numerical-error certificate, or efficiency guarantee is added. Preserve the current Project Skeleton Contract.
 
 ### 8.2 Mesh, controls, output
+
+`SolveOptions1D{}` defaults to `MeshMode::Uniform`. Uniform `solve(options)` returns a `Solution1D` whose `values` are identical to the original no-argument `solve()` result and whose `x` contains the original `Grid1D` coordinates, including endpoints. Uniform `events` is empty and `refinement_limited` is false. In Uniform mode, any `options.amr` value is ignored and must not affect PDE evaluation.
+
+Adaptive mode requires `options.amr.has_value()` and validates its AMR configuration as described below. A missing AMR configuration in Adaptive mode or an invalid/unrecognized `MeshMode` must throw `std::runtime_error` before invoking user callbacks. Both overloads share the existing exception and no-mutation guarantees. `Solution1D` is an owning **one-dimensional** result, deliberately not a dimension-generic framework; downstream code can consume its `x`/`values` without branching on mesh strategy.
+
+Example, after creating the existing `grid`, `pde` and `solver`:
+
+```cpp
+PDE::SolveOptions1D options;              // Uniform by default
+PDE::Solution1D uniform = solver.solve(options);
+
+options.mesh_mode = PDE::MeshMode::Adaptive;
+options.amr = PDE::AMROptions{3, 2049, 1e-4, 2e-5};
+PDE::Solution1D adaptive = solver.solve(options);
+```
 
 Start from the original uniform `Grid1D` nodes. Every original spatial interval is a level-0 dyadic root cell. A refinement bisects a leaf; coarsening merges an existing sibling pair. Store current coordinates and nodal values in ordered contiguous vectors. Keep distinct, finite, strictly increasing nodes with exactly the original physical endpoints. There is no 2:1 balancing requirement or pointer-tree primary representation. Existing `Grid1D` and `PDE1D` objects remain untouched.
 
 Require `max_nodes >= grid.nx()`, an integer `max_refinement_level >= 0`, finite `refine_tolerance > 0`, and finite `0 <= coarsen_tolerance < refine_tolerance`. The latter two are **caller-chosen scale parameters for mesh-selection heuristics only**, *not* acceptance criteria on true solution error. A split must produce a representable distinct midpoint. If desired splits are blocked by depth or node capacity, do not exceed those caps and report `refinement_limited=true`; never silently modify the tolerances. Invalid options throw `std::runtime_error` before sampling callbacks.
 
-On success return an owning `AMRResult` with `x.size()==values.size()`, matching strictly increasing nodes/values, the exact original physical endpoints, and accepted chronological `AMREvent` records. An event reports the completed step, time, operation, and the physical parent interval being split or formed by merging its children. A step-0 event is initial adaptation. Caller-owned configurations and theta are never modified, and errors return no partial successful `AMRResult`.
+On success Adaptive mode returns an owning `Solution1D` with `x.size()==values.size()`, matching strictly increasing nodes/values, the exact original physical endpoints, and accepted chronological `AMREvent` records. An event reports the completed step, time, operation, and the physical parent interval being split or formed by merging its children. A step-0 event is initial adaptation. Caller-owned configurations and theta are never modified, and errors return no partial successful `Solution1D`.
 
 ### 8.3 Three-node finite differences on current mesh
 
@@ -362,9 +383,9 @@ At initialization, use the original initial callback for any inserted initial mi
 
 ### 8.5 Exactly the existing PDE acceptance scope
 
-**Keep Section 7 unmodified:** the same analytic fixtures, numerical thresholds, fixed uniform refinement ladders, rate bands, error norms, heat benchmark, theta variations, Thomas tests, callback/error behavior and C++ integration evidence remain compulsory for the original `solve()` mode. Do not adjust those tests to make AMR appear favorable.
+**Keep Section 7 unmodified:** the same analytic fixtures, numerical thresholds, fixed uniform refinement ladders, rate bands, error norms, heat benchmark, theta variations, Thomas tests, callback/error behavior and C++ integration evidence remain compulsory for the original no-argument `solve()` mode. New Uniform `solve(options)` must yield identical values on the original grid. Do not adjust those tests to make AMR appear favorable.
 
-For `solveAdaptive()`, **reuse only the already-existing Section 7 analytic PDE fixtures** to check that the documented new capability is real: adaptive split and merge operations, ordered output coordinates, matching values, preserved endpoints, correct timestamps, theta/Thomas semantics and well-formed events. The analyst may derive direct mathematical/API conformance checks for these *stated* behaviors, but must not add new manufactured PDE cases, arbitrary numerical-accuracy thresholds, observed-order regression bands, transfer-error budgets, solver-speed comparisons, work-ratio targets or new numerical benchmark ladders. Do not silently require a given empirical refinement count or fixed time to split/merge as a new numerical criterion.
+For the Adaptive mode of `solve(options)`, **reuse only the already-existing Section 7 analytic PDE fixtures** to check that the documented new capability is real: adaptive split and merge operations, ordered output coordinates, matching values, preserved endpoints, correct timestamps, theta/Thomas semantics and well-formed events. The analyst may derive direct mathematical/API conformance checks for these *stated* behaviors, but must not add new manufactured PDE cases, arbitrary numerical-accuracy thresholds, observed-order regression bands, transfer-error budgets, solver-speed comparisons, work-ratio targets or new numerical benchmark ladders. Do not silently require a given empirical refinement count or fixed time to split/merge as a new numerical criterion.
 
 The original Section 7 fixed-grid norm `E_2=sqrt(dx*sum e_i^2)` and observed halving rates are specific to uniform meshes. For **descriptive** AMR results, report `E_inf=max_i|U_i-u_exact(T,x_i)|` and, if an integral-like error is desired, use the nonuniform trapezoidal quantity `sqrt(sum_i (x[i+1]-x[i])*(e[i]^2+e[i+1]^2)/2)`. These are diagnostic reporting formulas, **not new AMR pass/fail thresholds**. Implementation-dependent numerical experiments belong after implementation; additional material empirical acceptance requirements require explicit Owner authorization.
 
