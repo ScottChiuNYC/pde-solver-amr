@@ -1,0 +1,14 @@
+# Changes here are overwritten by Copier. Do not edit manually.
+_commit: v1.0.0
+_src_path: https://github.com/ScottChiuNYC/copier-pypackage-cpp.git
+author_email: scott.chiu@rutgers.edu
+author_name: Scott Chiu
+cmake_min_version: '3.25'
+cpp_standard: '17'
+description: Python/C++ PDE solver with adaptive mesh refinement
+module_name: pde_solver_amr
+project_name: pde-solver-amr
+project_slug: pde-solver-amr
+python_version: '>=3.12'
+vcpkg_port_name: pde-solver-amr-core
+version: 0.1.0
