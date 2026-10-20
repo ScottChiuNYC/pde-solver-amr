@@ -7,10 +7,10 @@ This journal records provenance only; it is not normative implementation authori
 - Essence: docs/development/essence.md
 - Run: ICC-20261020-AMR — https://github.com/ScottChiuNYC/pde-solver-amr/issues/1
 - Backend: GitHub
-- State: REMEDIATING
+- State: FROZEN
 - Skill revision: 9d1845f509a88dc8aad2f825f41a7009c3e77d6c
-- Latest audited target: f90372967c981f7e47b7a9b7fdde56e27c7c8a57
-- Latest round: R3
+- Latest audited target: c02d302c5f0f945bcb3fd34a64fd10129ca0f0a5
+- Latest round: R4
 - Isolation: delivery_only; fresh contexts without inherited history and dispatcher-filtered verified inputs. Workers retain inherited tools; this is not an enforced access sandbox.
 
 ## Round R1
@@ -66,3 +66,23 @@ The journal-only branch does not change audited normative authority. No solver i
 - Owner decisions: none; existing Section 8.5 bounded delegation.
 - Draft retained, fresh full-scope audit required.
 - Candidate f903729 baseline CI: Linux/Windows success, PR run 39474003309 and push run 39473997805.
+
+## Round R4 — PASS
+
+- Target: c02d302c5f0f945bcb3fd34a64fd10129ca0f0a5; tree e3564695d50cc5616440f69a53bffb8f66e5ac5f; Essence blob 6d1f5b92dae8842a8d021fbbc3d27a70e15bd797.
+- Control: https://github.com/ScottChiuNYC/pde-solver-amr/issues/21
+- Fresh independent sealed valid results: A1 PASS (#22), A2 PASS (#23), A3 PASS (#24); zero findings, no declared forbidden exposure.
+- Fresh reconciliation: https://github.com/ScottChiuNYC/pde-solver-amr/issues/25 — PASS / FREEZE.
+- Canonical substantive findings: none. C-01 through C-04 closed by fresh full-scope audit; no unresolved Owner Decisions.
+- Isolation: delivery_only; no inherited history, dispatcher-verified allowlisted packets, broader tools retained. This is not host-enforced access isolation.
+
+## Freeze
+
+- Reconciled PASS target: c02d302c5f0f945bcb3fd34a64fd10129ca0f0a5
+- Frozen contract: docs/development/essence.md
+- Frozen Essence blob: 7e2b3dff6feb858f5ad3d10667a202cdd137a486
+- Frozen content SHA-256: 678e0d9227277c336887b290aa46c6e9a74880e60ec5798af81a42bb209fdb82
+- Writeback is mechanical: title/status and non-normative PASS provenance only; inverse transformation reproduces the exact audited Essence.
+- Final freeze commit and merged main identity: durable run record https://github.com/ScottChiuNYC/pde-solver-amr/issues/1 (recorded after commit/merge; no self-referential commit hash).
+- Section 7 and all original Sections 1–7 domain semantics are unchanged; no solver implementation or new empirical acceptance promise.
+- Final exact-head and merged-main integration evidence is recorded in run #1 / PR #6; generated skeleton workflows are unchanged. This repository has no CodeBinder/PDF publication workflow.

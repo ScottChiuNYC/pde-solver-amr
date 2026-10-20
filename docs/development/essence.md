@@ -1,6 +1,8 @@
-# 1D Parabolic PDE Solver with Adaptive Mesh Refinement — Essence Draft
+# 1D Parabolic PDE Solver with Adaptive Mesh Refinement — Essence
 
-Status: **DRAFT — not audited, not FROZEN, not implementation-ready.**
+Status: **FROZEN — implementation-ready.**
+Freeze provenance (non-normative): reconciled PASS target `c02d302c5f0f945bcb3fd34a64fd10129ca0f0a5`; [R4 reconciliation](https://github.com/ScottChiuNYC/pde-solver-amr/issues/25); Skill revision `9d1845f509a88dc8aad2f825f41a7009c3e77d6c`. No unresolved Owner Decisions.
+
 
 Source: [the successfully implemented PDE Solver Frozen Essence](https://github.com/ScottChiuNYC/pde-solver-convergence-test/blob/93cf2a817bf9150a2917d2198ea5c188019e72c7/docs/development/essence.md), commit `93cf2a817bf9150a2917d2198ea5c188019e72c7`, blob `4f8c036f9e916fcacce37ee56c72566af9f5b8ed`. Its Frozen/audit status is **not** inherited here. The original uniform-grid API, numerical method and **every Section 7 acceptance requirement** are preserved. The sole intended capability change is optional adaptive spatial finite differences (Section 8). No prior AMR experimental contract or implementation is imported.
 
@@ -478,4 +480,4 @@ For the Adaptive mode of `solve(options)`, **reuse only the already-existing Sec
 
 The original Section 7 fixed-grid norm `E_2=sqrt(dx*sum e_i^2)` and observed halving rates are specific to uniform meshes. For **descriptive** AMR results, report `E_inf=max_i|U_i-u_exact(T,x_i)|` and, if an integral-like error is desired, use the nonuniform trapezoidal quantity `sqrt(sum_i (x[i+1]-x[i])*(e[i]^2+e[i+1]^2)/2)`. These are diagnostic reporting formulas, **not new AMR pass/fail thresholds**. Implementation-dependent numerical experiments belong after implementation; additional material empirical acceptance requirements require explicit Owner authorization.
 
-**This file is a Draft.** ICC may clarify actual ambiguities in the minimal AMR delta without silently expanding or weakening the previously proven fixed-grid numerical contract.
+**This file is FROZEN.** ICC may clarify actual ambiguities in the minimal AMR delta without silently expanding or weakening the previously proven fixed-grid numerical contract.
