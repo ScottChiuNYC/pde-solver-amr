@@ -1,0 +1,53 @@
+COMMAND: g++ --version
+g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+COMMAND: g++ -std=c++17 -ffp-contract=off -I /tmp/c2c-precode-amaf4tih -I /workspace/scratch/3d04287114f0/target/tests/cpp -I target/.dev-tools/vcpkg/packages/gtest_x64-linux/include -fsyntax-only /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_amr_acceptance.cpp /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_callbacks_acceptance.cpp /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_helpers_acceptance.cpp /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_multitu_acceptance.cpp /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_numerical_acceptance.cpp /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_thomas_acceptance.cpp /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_multitu_peer.cpp
+In file included from /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_acceptance_support.h:3,
+                 from /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_amr_oracle.h:3,
+                 from /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_amr_acceptance.cpp:1:
+/tmp/c2c-precode-amaf4tih/pde_solver_amr_core/PDE.h:121:33: warning: inline function ‘PDE::Scheme::CrankNicholson1D PDE::makeSolver1D(const Grid1D&, const PDE1D&)’ used but never defined
+  121 | inline Scheme::CrankNicholson1D makeSolver1D(Grid1D const& grid,
+      |                                 ^~~~~~~~~~~~
+In file included from /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_acceptance_support.h:3,
+                 from /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_callbacks_acceptance.cpp:1:
+/tmp/c2c-precode-amaf4tih/pde_solver_amr_core/PDE.h:121:33: warning: inline function ‘PDE::Scheme::CrankNicholson1D PDE::makeSolver1D(const Grid1D&, const PDE1D&)’ used but never defined
+  121 | inline Scheme::CrankNicholson1D makeSolver1D(Grid1D const& grid,
+      |                                 ^~~~~~~~~~~~
+In file included from /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_acceptance_support.h:3,
+                 from /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_helpers_acceptance.cpp:1:
+/tmp/c2c-precode-amaf4tih/pde_solver_amr_core/PDE.h:121:33: warning: inline function ‘PDE::Scheme::CrankNicholson1D PDE::makeSolver1D(const Grid1D&, const PDE1D&)’ used but never defined
+  121 | inline Scheme::CrankNicholson1D makeSolver1D(Grid1D const& grid,
+      |                                 ^~~~~~~~~~~~
+In file included from /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_acceptance_support.h:3,
+                 from /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_multitu_acceptance.cpp:1:
+/tmp/c2c-precode-amaf4tih/pde_solver_amr_core/PDE.h:121:33: warning: inline function ‘PDE::Scheme::CrankNicholson1D PDE::makeSolver1D(const Grid1D&, const PDE1D&)’ used but never defined
+  121 | inline Scheme::CrankNicholson1D makeSolver1D(Grid1D const& grid,
+      |                                 ^~~~~~~~~~~~
+In file included from /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_acceptance_support.h:3,
+                 from /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_numerical_acceptance.cpp:1:
+/tmp/c2c-precode-amaf4tih/pde_solver_amr_core/PDE.h:121:33: warning: inline function ‘PDE::Scheme::CrankNicholson1D PDE::makeSolver1D(const Grid1D&, const PDE1D&)’ used but never defined
+  121 | inline Scheme::CrankNicholson1D makeSolver1D(Grid1D const& grid,
+      |                                 ^~~~~~~~~~~~
+In file included from /workspace/scratch/3d04287114f0/target/tests/cpp/c2c_multitu_peer.cpp:1:
+/tmp/c2c-precode-amaf4tih/pde_solver_amr_core/PDE.h:121:33: warning: inline function ‘PDE::Scheme::CrankNicholson1D PDE::makeSolver1D(const Grid1D&, const PDE1D&)’ used but never defined
+  121 | inline Scheme::CrankNicholson1D makeSolver1D(Grid1D const& grid,
+      |                                 ^~~~~~~~~~~~
+COMMAND: g++ -std=c++17 -ffp-contract=off -I /tmp/c2c-precode-amaf4tih -I /workspace/scratch/3d04287114f0/target/tests/cpp -I target/.dev-tools/vcpkg/packages/gtest_x64-linux/include -O2 /tmp/c2c-precode-amaf4tih/oracle_probe.cpp -o /tmp/c2c-precode-amaf4tih/oracle-probe
+COMMAND: /tmp/c2c-precode-amaf4tih/oracle-probe
+fixture 0 theta 0.5 events 8
+fixture 0 theta 0.75 events 8
+fixture 0 theta 1 events 8
+fixture 1 theta 0.5 events 4
+fixture 1 theta 0.75 events 4
+fixture 1 theta 1 events 4
+fixture 2 theta 0.5 events 4
+fixture 2 theta 0.75 events 4
+fixture 2 theta 1 events 4
+fixture 3 theta 0.5 events 12
+fixture 3 theta 0.75 events 12
+fixture 3 theta 1 events 12
+coverage split=1 merge=1 later_split=1
+PASS: declarations-only syntax and API-neutral oracle coverage. Production API untested.
