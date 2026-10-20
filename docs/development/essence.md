@@ -341,7 +341,7 @@ PDE::Solution1D adaptive = solver.solve(options);
 
 Start from the original uniform `Grid1D` nodes. Every original spatial interval is a level-0 dyadic root cell. A refinement bisects a leaf; coarsening merges an existing sibling pair. Store current coordinates and nodal values in ordered contiguous vectors. Keep distinct, finite, strictly increasing nodes with exactly the original physical endpoints. There is no 2:1 balancing requirement or pointer-tree primary representation. Existing `Grid1D` and `PDE1D` objects remain untouched.
 
-Require `max_nodes >= grid.nx()`, an integer `max_refinement_level >= 0`, finite `refine_tolerance > 0`, and finite `0 <= coarsen_tolerance < refine_tolerance`. The latter two are **caller-chosen scale parameters for mesh-selection heuristics only**, *not* acceptance criteria on true solution error. A split must produce a representable distinct midpoint. If desired splits are blocked by depth or node capacity, do not exceed those caps and report `refinement_limited=true`; never silently modify the tolerances. Invalid options throw `std::runtime_error` before sampling callbacks.
+Require `max_nodes >= grid.nx()`, an integer `max_refinement_level >= 0`, finite `refine_tolerance > 0`, and finite `0 <= coarsen_tolerance < refine_tolerance`. The latter two are **caller-chosen scale parameters for mesh-selection heuristics only**, *not* acceptance criteria on true solution error. A requested split below the depth cap must pass the deterministic midpoint preflight in Section 8.4; failure throws `std::runtime_error`, even if node capacity would also block the batch. Depth and node-capacity limits instead permit successful continuation under Section 8.4 and set the sticky `refinement_limited=true`; never exceed those caps or silently modify the tolerances. Invalid options throw `std::runtime_error` before sampling callbacks.
 
 On success Adaptive mode returns an owning `Solution1D` with `x.size()==values.size()`, matching strictly increasing nodes/values, the exact original physical endpoints, and accepted chronological `AMREvent` records. An event reports the completed step, time, operation, and the physical parent interval being split or formed by merging its children. A step-0 event is initial adaptation. Caller-owned configurations and theta are never modified, and errors return no partial successful `Solution1D`.
 
@@ -365,6 +365,47 @@ D_{xx}U_i =
 
 For `h_L=h_R=dx`, both formulas reduce **algebraically exactly** to the original Section 4 uniform centered differences. Assemble `a D_{xx}+b D_x+cI` in **nondivergence form** with the same arithmetic endpoint coefficient averages, theta weights, old/new source sampling, Dirichlet corrections and Section 5 Thomas algorithm. Preserve the existing double-precision finite-value policy.
 
+The following operation schedule is normative **only for Adaptive mode**, including adaptive steps whose current nodes happen to be uniformly spaced. It does not change either Uniform entry point. Each assignment below denotes one binary64 result under Section 3's round-to-nearest and gradual-underflow model. Every product, division, addition and subtraction is a separate operation, with an immediate finiteness check before its result is used. Parentheses in the schedule identify such separate results, not a fused expression. Do not contract operations, use wider intermediates to bypass a check, form unscaled derivative weights first, reorder factors, or replace the schedule by an algebraically equivalent evaluation. Finite underflow, including zero, is retained without rescaling or retry; a nonfinite result throws `std::runtime_error` identifying the step/row and arithmetic category.
+
+At each interior row, first compute `hL=x[i]-x[i-1]`, then `hR=x[i+1]-x[i]`, then `H=hL+hR`, checking each for finiteness and strict positivity. Use the original `grid.dt()` as `dt`. Obtain `a_bar,b_bar,c_bar` from the same old/new coefficient samples and the overflow-avoiding mean rule in Section 4, with its separate checked operations. In the following order form directly time-scaled geometric factors:
+
+```text
+vL = dt / hL
+vR = dt / hR
+rL = vL / H
+rR = vR / H
+rD = vL / hR
+zL = hR / H
+zR = hL / H
+sL = vL * zL
+sR = vR * zR
+sD = vL - vR
+```
+
+Then form the coefficient contributions and dimensionless row entries in this order:
+
+```text
+arL = a_bar * rL
+arD = a_bar * rD
+arR = a_bar * rR
+bsL = b_bar * sL
+bsD = b_bar * sD
+bsR = b_bar * sR
+cdt = c_bar * dt
+dL = 2 * arL
+dD = (-2) * arD
+dR = 2 * arR
+qL = dL - bsL
+qD0 = dD + bsD
+qD = qD0 + cdt
+qR = dR + bsR
+```
+
+In exact arithmetic these are `dt` times the three coefficients of the displayed `a D_{xx}+b D_x+cI` stencil: `sD=dt*(hR-hL)/(hL*hR)` and `rD=dt/(hL*hR)`. The identities explain the mathematical stencil; they do not authorize a different binary64 sequence. In particular, products such as `hL*hR` are never formed by this schedule. Tiny spacings can make an unscaled weight overflow or its denominator underflow even when the prescribed time-scaled contributions are finite. Such unscaled intermediates are not evaluated and cannot cause failure; conversely any nonfinite intermediate actually prescribed above fails immediately, even if a rearrangement could avoid it. This is an arithmetic rule, not an additional accuracy or universal-success claim.
+
+Use these `qL,qD,qR` in the same theta row as Section 4, with the following explicit operation order. Compute `omega=1-theta`; compute `theta*qL`, negate it for `A_L`; compute `theta*qD`, then subtract it from `1` for `A_D`; compute `theta*qR`, then negate it for `A_R`. Compute `omega*qL` and then its product with `U[i-1]`; compute `omega*qD`, add `1`, then multiply by `U[i]`; compute `omega*qR` and then its product with `U[i+1]`. These are the three old-state terms in left/diagonal/right order. For the source, when theta is less than `1`, compute `omega*f(t_n,x_i)`; at theta `1` use literal zero for that product without evaluating the old source callback. Compute `theta*f(t_{n+1},x_i)`, add the old-source product to that new-source product, then multiply the sum by `dt`. Add the three old-state terms from left to right, then add this source term. Finally apply the left and then right Dirichlet corrections: compute each known-boundary matrix-entry/value product separately, then subtract it from the corresponding RHS. Check all those intermediate results, retain/omit the same matrix entries as Section 4, and use the unchanged Section 5 Thomas algorithm and final endpoint assignment.
+
+
 A nonuniform three-point `D_{xx}` stencil generally has a first-order local defect at abrupt transitions. Do **not** extend the original fixed-uniform-grid second-order spatial convergence claim or its empirical rate thresholds to arbitrary AMR meshes.
 
 ### 8.4 Minimal solution-driven refine/coarsen and transfer
@@ -377,7 +418,11 @@ C_i=\frac{\min(h_L,h_R)}{2}|s_i-s_{i-1}|.
 
 At endpoints use `C_0=C_1` and `C_{m-1}=C_{m-2}` for `m` nodes; for each leaf cell define `I_i=\max(C_i,C_{i+1})`. This is a **simple solution-curvature indicator, not a proved a posteriori PDE-error estimator**.
 
-Refine once, simultaneously, all cells with `I_i>refine_tolerance` that remain below the depth cap. If the proposed batch exceeds the node cap, do not apply that batch and mark the cap-limited result. Recompute indicators. Then coarsen once all eligible disjoint sibling pairs whose two child-cell indicators are each **strictly below** `coarsen_tolerance`, excluding newly refined children. Order accepted events from left to right within each batch. There is no repeated estimator-satisfaction loop, global transfer-budget ledger, adaptive-work target, or implicit numerical-accuracy promise.
+At each opportunity, compute the indicators on the pre-adaptation state. Any leaf with `I_i>refine_tolerance` at the depth cap sets `refinement_limited=true` and is excluded from the proposed refinement batch. The batch consists of all other leaves with `I_i>refine_tolerance`; split each at most once, simultaneously. A flag set at any opportunity remains true for the remainder of a successful solve, even if later coarsening frees capacity.
+
+Before the node-cap decision or any refinement mutation, inserted-value sampling/transfer, or refinement event, preflight the proposed leaves from left to right. For each parent `[left,right]`, compute, as separate checked binary64 operations in order, `width=right-left`, `half=width/2`, `mid=left+half`, under Section 3's arithmetic model. Require finite positive `width`, finite `half` and `mid`, and the strict test `left<mid && mid<right`. That exact `mid` is the coordinate used if the batch is accepted; do not substitute another midpoint expression, `nextafter`, or an endpoint. If any test fails, throw `std::runtime_error` identifying midpoint representability and the parent interval. This is a solve failure, not a depth/capacity limitation or a skipped cell: the entire proposed batch is unapplied, no event from it is accepted, no coarsening at that opportunity or subsequent PDE step occurs, and no partial `Solution1D` (including any earlier internal events) is returned. This failure takes precedence over a possible node-cap block. Leaves excluded solely by the depth cap are not midpoint-tested.
+
+After every proposed midpoint passes, let `m` be the current node count and `N` the proposed split count. Compare `N` with `max_nodes-m` without overflowing a node-count addition. If `N>max_nodes-m`, apply none of the refinement batch, insert no midpoint values and accept no refinement events, and set `refinement_limited=true`. Otherwise accept the entire batch, transfer/sample the inserted values as below, and record its refinement events from left to right. An empty batch has no refinement events. After either a successful refinement batch or a depth/node-cap limitation, recompute indicators on the resulting current state and then coarsen once all eligible disjoint sibling pairs whose two child-cell indicators are each **strictly below** `coarsen_tolerance`, excluding newly refined children. Record coarsening events from left to right after any refinement events at that opportunity. The solve then continues on that mesh to the next scheduled PDE step. A transfer, callback, arithmetic or other solve failure retains the existing no-partial-success rule. There is no repeated estimator-satisfaction loop, global transfer-budget ledger, adaptive-work target, or implicit numerical-accuracy promise.
 
 At initialization, use the original initial callback for any inserted initial midpoints, retaining old nodal values. At later refinement, insert a midpoint by **linear interpolation** from the two adjacent old values, retaining every old node/value. Coarsening removes only the shared child midpoint and retains every other node/value. Time, original endpoints and caller callbacks remain unchanged. All subsequent PDE callback sampling occurs on the current mesh under the original Section 4 theta semantics.
 

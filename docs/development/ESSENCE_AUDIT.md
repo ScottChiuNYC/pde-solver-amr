@@ -7,7 +7,7 @@ This journal records provenance only; it is not normative implementation authori
 - Essence: docs/development/essence.md
 - Run: ICC-20261020-AMR — https://github.com/ScottChiuNYC/pde-solver-amr/issues/1
 - Backend: GitHub
-- State: AUDITING
+- State: REMEDIATING
 - Skill revision: 9d1845f509a88dc8aad2f825f41a7009c3e77d6c
 - Latest audited target: f6ea97425cb757d95b5cbb16832145144b6f3514
 - Latest round: R1
@@ -20,13 +20,22 @@ This journal records provenance only; it is not normative implementation authori
 - Essence blob: bd1794968061c80cd49aee1bd165049817f58ff2
 - Scope: complete current Draft, including preserved fixed-grid contract and additive adaptive spatial delta; Project Skeleton Contract v1.1.
 - Control: https://github.com/ScottChiuNYC/pde-solver-amr/issues/2
-- A1: PENDING — https://github.com/ScottChiuNYC/pde-solver-amr/issues/3
-- A2: PENDING — https://github.com/ScottChiuNYC/pde-solver-amr/issues/4
-- A3: PENDING — https://github.com/ScottChiuNYC/pde-solver-amr/issues/5
-- Reconciliation: pending all valid sealed slots
+- A1: FAIL — https://github.com/ScottChiuNYC/pde-solver-amr/issues/3
+- A2: FAIL — https://github.com/ScottChiuNYC/pde-solver-amr/issues/4
+- A3: FAIL — https://github.com/ScottChiuNYC/pde-solver-amr/issues/5
+- Reconciliation: https://github.com/ScottChiuNYC/pde-solver-amr/issues/7
 - Owner decisions: none established
-- Round verdict: pending
+- Round verdict: FAIL; next transition REMEDIATE
 
 ## Integration
 
 The journal-only branch does not change audited normative authority. No solver implementation or new empirical acceptance obligation is introduced. The target repository has no CodeBinder/publication workflow; its normal build workflow is retained.
+
+## R1 remediation
+
+- Canonical findings: C-01 (midpoint representability transition), C-02 (Adaptive binary64 row schedule).
+- Remediation record: https://github.com/ScottChiuNYC/pde-solver-amr/issues/8
+- Repaired candidate Essence blob: e31493bd9b85469b8dde626e9eba426babcc7c62
+- Authority: explicit Section 8.5 ICC clarification delegation; no Owner Decision.
+- Static validation: only Sections 8.2–8.4 changed; Sections 1–7, 8.1 and 8.5 byte-identical. No API change, new empirical gate or solver implementation.
+- Independent fresh exact-target audit remains required; remediation is not PASS.
