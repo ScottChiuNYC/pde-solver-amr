@@ -312,21 +312,21 @@ Record grid/domain, theta, fixture identity, both errors and pairwise rates, com
 
 ### 8.1 Only delta: adapt the grid, not the PDE solver
 
-The fixed-grid \`solve()\` contract of Sections 2–7 is preserved **in full**. It remains callable by the same C++17 source, with the same \`Grid1D\`, \`PDE1D\`, \`CrankNicholson1D\`, \`makeSolver1D\`, theta range \`[0.5,1]\`, coefficient endpoint averaging, original sampling/Dirichlet semantics, Thomas solver, validation/failure behavior, and Section 7 numerical acceptance tests.
+The fixed-grid `solve()` contract of Sections 2–7 is preserved **in full**. It remains callable by the same C++17 source, with the same `Grid1D`, `PDE1D`, `CrankNicholson1D`, `makeSolver1D`, theta range `[0.5,1]`, coefficient endpoint averaging, original sampling/Dirichlet semantics, Thomas solver, validation/failure behavior, and Section 7 numerical acceptance tests.
 
-\`solveAdaptive(AMROptions)\` is an **additive opt-in method** on the *same* scheme object. It uses the same fixed time grid and theta stepping; the only differences are evolving nonuniform spatial nodes, the resulting three-point spatial weights, refinement/coarsening, necessary nodal transfer, and the final mesh/event output. No Rannacher startup, adaptive time stepping, different linear solver, alternative PDE family, public spatial evaluator, global numerical-error certificate, or efficiency guarantee is added. Preserve the current Project Skeleton Contract.
+`solveAdaptive(AMROptions)` is an **additive opt-in method** on the *same* scheme object. It uses the same fixed time grid and theta stepping; the only differences are evolving nonuniform spatial nodes, the resulting three-point spatial weights, refinement/coarsening, necessary nodal transfer, and the final mesh/event output. No Rannacher startup, adaptive time stepping, different linear solver, alternative PDE family, public spatial evaluator, global numerical-error certificate, or efficiency guarantee is added. Preserve the current Project Skeleton Contract.
 
 ### 8.2 Mesh, controls, output
 
-Start from the original uniform \`Grid1D\` nodes. Every original spatial interval is a level-0 dyadic root cell. A refinement bisects a leaf; coarsening merges an existing sibling pair. Store current coordinates and nodal values in ordered contiguous vectors. Keep distinct, finite, strictly increasing nodes with exactly the original physical endpoints. There is no 2:1 balancing requirement or pointer-tree primary representation. Existing \`Grid1D\` and \`PDE1D\` objects remain untouched.
+Start from the original uniform `Grid1D` nodes. Every original spatial interval is a level-0 dyadic root cell. A refinement bisects a leaf; coarsening merges an existing sibling pair. Store current coordinates and nodal values in ordered contiguous vectors. Keep distinct, finite, strictly increasing nodes with exactly the original physical endpoints. There is no 2:1 balancing requirement or pointer-tree primary representation. Existing `Grid1D` and `PDE1D` objects remain untouched.
 
-Require \`max_nodes >= grid.nx()\`, an integer \`max_refinement_level >= 0\`, finite \`refine_tolerance > 0\`, and finite \`0 <= coarsen_tolerance < refine_tolerance\`. The latter two are **caller-chosen scale parameters for mesh-selection heuristics only**, *not* acceptance criteria on true solution error. A split must produce a representable distinct midpoint. If desired splits are blocked by depth or node capacity, do not exceed those caps and report \`refinement_limited=true\`; never silently modify the tolerances. Invalid options throw \`std::runtime_error\` before sampling callbacks.
+Require `max_nodes >= grid.nx()`, an integer `max_refinement_level >= 0`, finite `refine_tolerance > 0`, and finite `0 <= coarsen_tolerance < refine_tolerance`. The latter two are **caller-chosen scale parameters for mesh-selection heuristics only**, *not* acceptance criteria on true solution error. A split must produce a representable distinct midpoint. If desired splits are blocked by depth or node capacity, do not exceed those caps and report `refinement_limited=true`; never silently modify the tolerances. Invalid options throw `std::runtime_error` before sampling callbacks.
 
-On success return an owning \`AMRResult\` with \`x.size()==values.size()\`, matching strictly increasing nodes/values, the exact original physical endpoints, and accepted chronological \`AMREvent\` records. An event reports the completed step, time, operation, and the physical parent interval being split or formed by merging its children. A step-0 event is initial adaptation. Caller-owned configurations and theta are never modified, and errors return no partial successful \`AMRResult\`.
+On success return an owning `AMRResult` with `x.size()==values.size()`, matching strictly increasing nodes/values, the exact original physical endpoints, and accepted chronological `AMREvent` records. An event reports the completed step, time, operation, and the physical parent interval being split or formed by merging its children. A step-0 event is initial adaptation. Caller-owned configurations and theta are never modified, and errors return no partial successful `AMRResult`.
 
 ### 8.3 Three-node finite differences on current mesh
 
-Keep the spatial mesh **fixed throughout each complete time step**. Let \`h_L=x_i-x_{i-1}\`, \`h_R=x_{i+1}-x_i\` at interior nodes. Only replace the existing uniform-grid centered stencils by:
+Keep the spatial mesh **fixed throughout each complete time step**. Let `h_L=x_i-x_{i-1}`, `h_R=x_{i+1}-x_i` at interior nodes. Only replace the existing uniform-grid centered stencils by:
 
 \[
 D_x U_i =
@@ -342,30 +342,30 @@ D_{xx}U_i =
 +\frac{2}{h_R(h_L+h_R)}U_{i+1}.
 \]
 
-For \`h_L=h_R=dx\`, both formulas reduce **algebraically exactly** to the original Section 4 uniform centered differences. Assemble \`a D_{xx}+b D_x+cI\` in **nondivergence form** with the same arithmetic endpoint coefficient averages, theta weights, old/new source sampling, Dirichlet corrections and Section 5 Thomas algorithm. Preserve the existing double-precision finite-value policy.
+For `h_L=h_R=dx`, both formulas reduce **algebraically exactly** to the original Section 4 uniform centered differences. Assemble `a D_{xx}+b D_x+cI` in **nondivergence form** with the same arithmetic endpoint coefficient averages, theta weights, old/new source sampling, Dirichlet corrections and Section 5 Thomas algorithm. Preserve the existing double-precision finite-value policy.
 
-A nonuniform three-point \`D_{xx}\` stencil generally has a first-order local defect at abrupt transitions. Do **not** extend the original fixed-uniform-grid second-order spatial convergence claim or its empirical rate thresholds to arbitrary AMR meshes.
+A nonuniform three-point `D_{xx}` stencil generally has a first-order local defect at abrupt transitions. Do **not** extend the original fixed-uniform-grid second-order spatial convergence claim or its empirical rate thresholds to arbitrary AMR meshes.
 
 ### 8.4 Minimal solution-driven refine/coarsen and transfer
 
-Allow one adaptation opportunity at initialization and one after each completed full step **except the final step**; never regrid inside a theta step. For slopes \`s_i=(U_{i+1}-U_i)/(x_{i+1}-x_i)\`, define at each interior node
+Allow one adaptation opportunity at initialization and one after each completed full step **except the final step**; never regrid inside a theta step. For slopes `s_i=(U_{i+1}-U_i)/(x_{i+1}-x_i)`, define at each interior node
 
 \[
 C_i=\frac{\min(h_L,h_R)}{2}|s_i-s_{i-1}|.
 \]
 
-At endpoints use \`C_0=C_1\` and \`C_{m-1}=C_{m-2}\` for \`m\` nodes; for each leaf cell define \`I_i=\max(C_i,C_{i+1})\`. This is a **simple solution-curvature indicator, not a proved a posteriori PDE-error estimator**.
+At endpoints use `C_0=C_1` and `C_{m-1}=C_{m-2}` for `m` nodes; for each leaf cell define `I_i=\max(C_i,C_{i+1})`. This is a **simple solution-curvature indicator, not a proved a posteriori PDE-error estimator**.
 
-Refine once, simultaneously, all cells with \`I_i>refine_tolerance\` that remain below the depth cap. If the proposed batch exceeds the node cap, do not apply that batch and mark the cap-limited result. Recompute indicators. Then coarsen once all eligible disjoint sibling pairs whose two child-cell indicators are each **strictly below** \`coarsen_tolerance\`, excluding newly refined children. Order accepted events from left to right within each batch. There is no repeated estimator-satisfaction loop, global transfer-budget ledger, adaptive-work target, or implicit numerical-accuracy promise.
+Refine once, simultaneously, all cells with `I_i>refine_tolerance` that remain below the depth cap. If the proposed batch exceeds the node cap, do not apply that batch and mark the cap-limited result. Recompute indicators. Then coarsen once all eligible disjoint sibling pairs whose two child-cell indicators are each **strictly below** `coarsen_tolerance`, excluding newly refined children. Order accepted events from left to right within each batch. There is no repeated estimator-satisfaction loop, global transfer-budget ledger, adaptive-work target, or implicit numerical-accuracy promise.
 
 At initialization, use the original initial callback for any inserted initial midpoints, retaining old nodal values. At later refinement, insert a midpoint by **linear interpolation** from the two adjacent old values, retaining every old node/value. Coarsening removes only the shared child midpoint and retains every other node/value. Time, original endpoints and caller callbacks remain unchanged. All subsequent PDE callback sampling occurs on the current mesh under the original Section 4 theta semantics.
 
 ### 8.5 Exactly the existing PDE acceptance scope
 
-**Keep Section 7 unmodified:** the same analytic fixtures, numerical thresholds, fixed uniform refinement ladders, rate bands, error norms, heat benchmark, theta variations, Thomas tests, callback/error behavior and C++ integration evidence remain compulsory for the original \`solve()\` mode. Do not adjust those tests to make AMR appear favorable.
+**Keep Section 7 unmodified:** the same analytic fixtures, numerical thresholds, fixed uniform refinement ladders, rate bands, error norms, heat benchmark, theta variations, Thomas tests, callback/error behavior and C++ integration evidence remain compulsory for the original `solve()` mode. Do not adjust those tests to make AMR appear favorable.
 
-For \`solveAdaptive()\`, **reuse only the already-existing Section 7 analytic PDE fixtures** to check that the documented new capability is real: adaptive split and merge operations, ordered output coordinates, matching values, preserved endpoints, correct timestamps, theta/Thomas semantics and well-formed events. The analyst may derive direct mathematical/API conformance checks for these *stated* behaviors, but must not add new manufactured PDE cases, arbitrary numerical-accuracy thresholds, observed-order regression bands, transfer-error budgets, solver-speed comparisons, work-ratio targets or new numerical benchmark ladders. Do not silently require a given empirical refinement count or fixed time to split/merge as a new numerical criterion.
+For `solveAdaptive()`, **reuse only the already-existing Section 7 analytic PDE fixtures** to check that the documented new capability is real: adaptive split and merge operations, ordered output coordinates, matching values, preserved endpoints, correct timestamps, theta/Thomas semantics and well-formed events. The analyst may derive direct mathematical/API conformance checks for these *stated* behaviors, but must not add new manufactured PDE cases, arbitrary numerical-accuracy thresholds, observed-order regression bands, transfer-error budgets, solver-speed comparisons, work-ratio targets or new numerical benchmark ladders. Do not silently require a given empirical refinement count or fixed time to split/merge as a new numerical criterion.
 
-The original Section 7 fixed-grid norm \`E_2=sqrt(dx*sum e_i^2)\` and observed halving rates are specific to uniform meshes. For **descriptive** AMR results, report \`E_inf=max_i|U_i-u_exact(T,x_i)|\` and, if an integral-like error is desired, use the nonuniform trapezoidal quantity \`sqrt(sum_i (x[i+1]-x[i])*(e[i]^2+e[i+1]^2)/2)\`. These are diagnostic reporting formulas, **not new AMR pass/fail thresholds**. Implementation-dependent numerical experiments belong after implementation; additional material empirical acceptance requirements require explicit Owner authorization.
+The original Section 7 fixed-grid norm `E_2=sqrt(dx*sum e_i^2)` and observed halving rates are specific to uniform meshes. For **descriptive** AMR results, report `E_inf=max_i|U_i-u_exact(T,x_i)|` and, if an integral-like error is desired, use the nonuniform trapezoidal quantity `sqrt(sum_i (x[i+1]-x[i])*(e[i]^2+e[i+1]^2)/2)`. These are diagnostic reporting formulas, **not new AMR pass/fail thresholds**. Implementation-dependent numerical experiments belong after implementation; additional material empirical acceptance requirements require explicit Owner authorization.
 
 **This file is a Draft.** ICC may clarify actual ambiguities in the minimal AMR delta without silently expanding or weakening the previously proven fixed-grid numerical contract.
