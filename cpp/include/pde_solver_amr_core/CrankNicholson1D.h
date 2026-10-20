@@ -8,10 +8,17 @@
 #include <utility>
 namespace PDE { namespace detail {
 inline void validatePDE(PDE1D const& p) {
-    for (auto type:p.boundaryConfig.types)
-        if(type!=BoundaryType::Dirichlet)throw std::runtime_error("unsupported boundary type");
-    if(!p.diffusion || !p.advection || !p.reaction || !p.source || !p.initial || !p.boundaryL || !p.boundaryR)
-        throw std::runtime_error("missing PDE callback");
+    for (std::size_t side=0;side<p.boundaryConfig.types.size();++side)
+        if(p.boundaryConfig.types[side]!=BoundaryType::Dirichlet)
+            throw std::runtime_error(std::string("unsupported ")+
+                (side==BoundaryConfig1D::Left?"left":"right")+" boundary type");
+    if(!p.diffusion)throw std::runtime_error("missing diffusion PDE callback");
+    if(!p.advection)throw std::runtime_error("missing advection PDE callback");
+    if(!p.reaction)throw std::runtime_error("missing reaction PDE callback");
+    if(!p.source)throw std::runtime_error("missing source PDE callback");
+    if(!p.initial)throw std::runtime_error("missing initial PDE callback");
+    if(!p.boundaryL)throw std::runtime_error("missing boundaryL PDE callback");
+    if(!p.boundaryR)throw std::runtime_error("missing boundaryR PDE callback");
 }
 inline double sample(Func::F1D const& f,double t,double x,std::string const& role) {
     return finite(f(t,x),role+" callback t="+std::to_string(t)+" x="+std::to_string(x));
